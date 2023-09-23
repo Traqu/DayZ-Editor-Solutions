@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Objects;
 
-public class MissionSelector extends JFrame implements ActionListener{
+public class MissionSelector extends JFrame implements ActionListener {
 
     public static final JPanel PANEL = new JPanel();
     final private static String APPLICATION_TITLE = " Dayz Editor Purifier";
@@ -43,18 +43,15 @@ public class MissionSelector extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String mission = "";
         if (e.getSource() == chooseEnoch) {
-            mapgroupprotoPath = "/mapgroupproto/mapgroupproto_-_livonia.xml";
-            System.out.println("Loot spawns will be assigned to assets as for Livonia, using file: " + mapgroupprotoPath + "\n");
-            this.dispose();
-            new FileSelector(chooseEnoch.getText(), "livonia.jpg");
+            mission = "livonia";
         }
         if (e.getSource() == chooseChernarus) {
-            mapgroupprotoPath = "/mapgroupproto/mapgroupproto_-_chernarus.xml";
-            System.out.println("Loot spawns will be assigned to assets as for Chernarus, using file: " + mapgroupprotoPath + "\n");
-            this.dispose();
-            new FileSelector(chooseChernarus.getText(), "chernarus.jpg");
+            mission = "chernarus";
         }
-        System.out.println("pressed");
+        mapgroupprotoPath = "/protoFiles/" + mission;
+        new FileSelector(chooseChernarus.getText(), mission + ".jpg");
+        this.dispose();
     }
 }
