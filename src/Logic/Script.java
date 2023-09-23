@@ -15,19 +15,8 @@ public class Script {
         System.out.println("File location: " + filePath);
         List<String> placedObjects;
 
-        File sourceDir = new File("resources/protoFiles");
-        File[] files = sourceDir.listFiles();
-        assert files != null;
-        for (File file : files) {
-            if (!file.getName().equals("rawProtoFiles")) {
-                try {
-                    List<String> lines = Files.readAllLines(Path.of(file.getPath()));
-                    HAS_LOOTSPAWNS_SET.addAll(lines);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+        readLinesFromResourceFile("livonia");
+        readLinesFromResourceFile("chernarus");
 
         try {
             placedObjects = Files.readAllLines(Path.of(filePath));
@@ -60,5 +49,21 @@ public class Script {
             throw new RuntimeException(e);
         }
         System.exit(0);
+    }
+
+    private void readLinesFromResourceFile(String map) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/protoFiles/" + map)) {
+            if (inputStream != null) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    HAS_LOOTSPAWNS_SET.add(line);
+                }
+            } else {
+                throw new RuntimeException("Nie można odczytać zasobów protoFiles.");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
