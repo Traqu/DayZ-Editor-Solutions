@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class CompareFiles {
+public class FilesComparator {
     public static void main(String[] args) {
         String file1Path = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Purifier\\resources\\protoFiles\\chernarusTest";
         String file2Path = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Purifier\\resources\\protoFiles\\livoniaTest";

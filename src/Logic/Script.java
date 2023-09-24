@@ -8,6 +8,10 @@ import java.util.List;
 
 public class Script {
     public static final String USER_PATH = System.getProperty("user.home");
+    private static final String CUSTOM_RESOURCES_SUB_PATH = "\\AppData\\Local\\DayZ EditorPurifier\\custom";
+    private static final String CUSTOM_RESOURCES_PATH = USER_PATH + CUSTOM_RESOURCES_SUB_PATH;
+
+
     private final List<String> HAS_LOOTSPAWNS_LIST = new ArrayList<>();
     private final Set<String> HAS_LOOTSPAWNS_SET = new HashSet<>();
 
@@ -15,8 +19,27 @@ public class Script {
         System.out.println("File location: " + filePath);
         List<String> placedObjects;
 
+
+        File file = new File(CUSTOM_RESOURCES_PATH);
+        File[] customFiles = file.listFiles();
+
         readLinesFromResourceFile("livonia");
         readLinesFromResourceFile("chernarus");
+
+        for (File customFile : customFiles) {
+            BufferedReader customFilesReader = new BufferedReader(new FileReader(customFile.getPath()));
+            String line;
+            while (true) {
+                try {
+                    if ((line = customFilesReader.readLine()) == null) break;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                    HAS_LOOTSPAWNS_SET.add(line);
+            }
+        }
+
+        //TODO dodać również wszystkie customowe pliki :)
 
         try {
             placedObjects = Files.readAllLines(Path.of(filePath));

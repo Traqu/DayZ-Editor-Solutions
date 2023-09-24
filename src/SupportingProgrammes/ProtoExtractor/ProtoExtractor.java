@@ -31,7 +31,7 @@ public class ProtoExtractor {
         File[] files = sourceDir.listFiles();
         assert files != null;
         for (File file : files) {
-            if(!file.getName().equals("rawProtoFiles")){
+            if (!file.getName().equals("rawProtoFiles")) {
                 try {
                     removeEmptyLines(file.getAbsolutePath());
                 } catch (IOException e) {
@@ -78,7 +78,7 @@ public class ProtoExtractor {
             return fileName.substring(startIndex, endIndex);
         }
 
-        return fileName; // Jeśli nie znaleziono odpowiednich indeksów, zwróć oryginalną nazwę
+        return fileName;
     }
 
     public static void removeEmptyLines(String filePath) throws IOException {
@@ -102,5 +102,9 @@ public class ProtoExtractor {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         writer.write(content.toString());
         writer.close();
+    }
+
+    public static void extract() {
+        System.out.println();
     }
 }
