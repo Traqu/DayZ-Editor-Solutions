@@ -12,7 +12,8 @@ public class LandEntitiesImporter {
 
     public static final Font FONT_BAGHDAD = new Font("Baghdad", Font.BOLD, 12);
 
-    public static void main(String[] args) {
+    public LandEntitiesImporter() {
+
 //        ProtoExtractor.importToResourceFile();
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
