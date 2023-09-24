@@ -14,7 +14,6 @@ public class LandEntitiesImporter {
 
     public LandEntitiesImporter() {
 
-//        ProtoExtractor.importToResourceFile();
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
