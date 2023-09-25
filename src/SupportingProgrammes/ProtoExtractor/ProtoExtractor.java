@@ -103,8 +103,4 @@ public class ProtoExtractor {
         writer.write(content.toString());
         writer.close();
     }
-
-    public static void extract() {
-        System.out.println();
-    }
 }

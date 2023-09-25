@@ -25,7 +25,6 @@ public class CustomClassExtractor {
     }
 
     private List<String> readFromFile(String path) throws IOException {
-//        String resourceDestination = RESOURCES_PATH + File.separator + fetchFileName(path);
         List<String> linesList = new ArrayList<>();
 
         File sourceFile = new File(path);
@@ -54,7 +53,7 @@ public class CustomClassExtractor {
                 if (split.length != 1) {
                     customResourceWriter.print(split[1]);
                     if (i < linesList.size() - 1) {
-                        customResourceWriter.println(); // Dodaj nową linię tylko jeśli to nie jest ostatnia linia
+                        customResourceWriter.println();
                     }
                 }
             }

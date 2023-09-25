@@ -37,7 +37,7 @@ public class FileChooser extends JFileChooser {
             }
         } else {
             try {
-                CustomClassExtractor customClassExtractor = new CustomClassExtractor(this.getSelectedFile().getPath());
+                new CustomClassExtractor(this.getSelectedFile().getPath());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -51,9 +51,6 @@ public class FileChooser extends JFileChooser {
         if (isCustomFileChooser) {
             new FileSelector();
             frame.setVisible(false);
-//            frame.removeAll();
-//            JPanel panel = new JPanel();
-//            frame.add(panel);
         } else {
             System.exit(0);
         }

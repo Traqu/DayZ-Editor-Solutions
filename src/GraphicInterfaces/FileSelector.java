@@ -21,11 +21,7 @@ public class FileSelector extends JFrame {
         ImageIcon logo = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("graphics/livonia.jpg")));
         this.setIconImage(logo.getImage());
         this.setVisible(true);
-
-//        if(!mission.equals(""))
-//            this.setTitle(APPLICATION_TITLE + " (" + mission + ")");
-//        else
-            this.setTitle(APPLICATION_TITLE);
+        this.setTitle(APPLICATION_TITLE);
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -38,7 +34,7 @@ public class FileSelector extends JFrame {
         this.setLocation((DESKTOP_WIDTH / 2) - (this.getWidth() / 2), DESKTOP_HEIGHT / 2 - (this.getHeight() / 2));
         this.add(PANEL);
         FileChooser fileChooser = new FileChooser(System.getProperty("user.home") + "\\Documents\\DayZ\\Editor");
-        fileChooser.setFileFilter(new FileNameExtensionFilter("MapGroupPos files","xml"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("MapGroupPos files", "xml"));
         PANEL.add(fileChooser);
     }
 }

@@ -21,6 +21,7 @@ public class LandEntitiesImporter {
             throw new RuntimeException(exception);
         }
         JFrame frame = new JFrame(" Dayz Editor Purifier");
+        frame.setResizable(false);
         JPanel anchorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         frame.add(anchorPanel);
         ImageIcon logo = new ImageIcon(Objects.requireNonNull(LandEntitiesImporter.class.getClassLoader().getResource("graphics/logo.jpg")));
@@ -28,10 +29,13 @@ public class LandEntitiesImporter {
         int desktopHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         setupFrame(frame, logo, desktopWidth, desktopHeight, new Dimension(500, 205));
         JButton add = new JButton("Add");
-        JTextArea prompt = new JTextArea(" You can add custom classes file.\n" +
-                " Provide file in xml format, containing lines corresponding to the example below: \n\n" +
-                "\t<group name=\"CLASSNAME\"[optional characters]\n\n" +
-                " All other lines will be ignored.    Once added, they will stay forever.");
+        JTextArea prompt = new JTextArea("""
+                 You can add custom classes file.
+                 Provide file in xml format, containing lines corresponding to the example below:\s
+
+                \t<group name="CLASSNAME"[optional characters]
+
+                 All other lines will be ignored.    Once added, they will stay forever.""");
         prompt.setFocusable(false);
         prompt.setEditable(false);
         JButton skip = new JButton("Skip");

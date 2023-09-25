@@ -26,20 +26,20 @@ public class Script {
         readLinesFromResourceFile("livonia");
         readLinesFromResourceFile("chernarus");
 
-        for (File customFile : customFiles) {
-            BufferedReader customFilesReader = new BufferedReader(new FileReader(customFile.getPath()));
-            String line;
-            while (true) {
-                try {
-                    if ((line = customFilesReader.readLine()) == null) break;
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        if (customFiles != null) {
+            for (File customFile : customFiles) {
+                BufferedReader customFilesReader = new BufferedReader(new FileReader(customFile.getPath()));
+                String line;
+                while (true) {
+                    try {
+                        if ((line = customFilesReader.readLine()) == null) break;
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     HAS_LOOTSPAWNS_SET.add(line);
+                }
             }
         }
-
-        //TODO dodać również wszystkie customowe pliki :)
 
         try {
             placedObjects = Files.readAllLines(Path.of(filePath));
@@ -56,7 +56,7 @@ public class Script {
 
         String path = USER_PATH + File.separator + "Documents" + File.separator + "DayZ" + File.separator + "Editor";
 
-        sourceFile = sourceFile.substring(0,sourceFile.length()-4);
+        sourceFile = sourceFile.substring(0, sourceFile.length() - 4);
         String output = path + File.separator + sourceFile + ".txt";
 
         try (PrintWriter writer = new PrintWriter(output)) {
