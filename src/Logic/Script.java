@@ -10,21 +10,23 @@ public class Script {
     public static final String USER_PATH = System.getProperty("user.home");
     private static final String CUSTOM_RESOURCES_SUB_PATH = "\\AppData\\Local\\DayZ EditorPurifier\\custom";
     private static final String CUSTOM_RESOURCES_PATH = USER_PATH + CUSTOM_RESOURCES_SUB_PATH;
+    public static final String LIVONIA = "livonia";
+    public static final String CHERNARUS = "chernarus";
 
 
     private final List<String> HAS_LOOTSPAWNS_LIST = new ArrayList<>();
     private final Set<String> HAS_LOOTSPAWNS_SET = new HashSet<>();
 
     public Script(String filePath, String sourceFile) throws FileNotFoundException {
-        System.out.println("File location: " + filePath);
+        System.out.println("Extracting from: " + filePath);
         List<String> placedObjects;
 
 
         File file = new File(CUSTOM_RESOURCES_PATH);
         File[] customFiles = file.listFiles();
 
-        readLinesFromResourceFile("livonia");
-        readLinesFromResourceFile("chernarus");
+        readLinesFromResourceFile(LIVONIA);
+        readLinesFromResourceFile(CHERNARUS);
 
         if (customFiles != null) {
             for (File customFile : customFiles) {
@@ -54,7 +56,7 @@ public class Script {
 
         }));
 
-        String path = USER_PATH + File.separator + "Documents" + File.separator + "DayZ" + File.separator + "Editor";
+        String path = USER_PATH + "\\Documents\\DayZ\\Editor";
 
         sourceFile = sourceFile.substring(0, sourceFile.length() - 4);
         String output = path + File.separator + sourceFile + ".txt";

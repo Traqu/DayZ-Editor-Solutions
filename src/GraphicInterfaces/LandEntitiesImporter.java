@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class LandEntitiesImporter {
@@ -49,7 +50,29 @@ public class LandEntitiesImporter {
         add.setPreferredSize(buttonsSize);
         skip.setPreferredSize(buttonsSize);
         buttonPanel.add(add);
-        buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * buttonsSize.width - 2 * 28));
+        File customDirectory = new File(System.getProperty("user.home") + "\\AppData\\Local\\DayZ EditorPurifier\\custom");
+        if (new File(customDirectory.toURI()).exists()) {
+            if ((customDirectory.listFiles().length != 0)){
+                JButton openCustomDirectory = new JButton("Browse custom files");
+                buttonPanel.add(Box.createHorizontalStrut(3));
+                buttonPanel.add(openCustomDirectory);
+                buttonPanel.add(Box.createHorizontalStrut(3));
+                openCustomDirectory.setPreferredSize(new Dimension(buttonsSize.width + 9, buttonsSize.height));
+                openCustomDirectory.setFont(FONT_BAGHDAD);
+                openCustomDirectory.addActionListener(e -> {
+
+                    try {
+                        Desktop.getDesktop().open(customDirectory);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+            } else {
+                buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * buttonsSize.width - 2 * 28));
+            }
+        } else {
+            buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * buttonsSize.width - 2 * 28));
+        }
         buttonPanel.add(skip);
         add.setFocusable(false);
         skip.setFocusable(false);
@@ -70,7 +93,7 @@ public class LandEntitiesImporter {
             setupFrame(fileChooserFrame, logo, desktopWidth, desktopHeight, new Dimension(600, 435));
             fileChooserFrame.add(fileChooser);
             fileChooserFrame.pack();
-            fileChooser.setFileFilter(new FileNameExtensionFilter(".xml","xml"));
+            fileChooser.setFileFilter(new FileNameExtensionFilter(".xml", "xml"));
             fileChooserFrame.setTitle("Custom file importer");
         });
 
