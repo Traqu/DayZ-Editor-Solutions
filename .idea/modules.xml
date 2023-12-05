@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DayZ_Editor_Purifier.iml" filepath="$PROJECT_DIR$/DayZ_Editor_Purifier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DayZ Editor Purifier.iml" filepath="$PROJECT_DIR$/DayZ Editor Purifier.iml" />
     </modules>
   </component>
 </project>
