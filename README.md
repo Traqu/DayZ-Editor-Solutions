@@ -40,6 +40,7 @@ This step is pretty straight forward.<br>
 - Simply select and export content from desired file by clicking `export` button.
 After doing so, the application will terminate, and newly generated `.txt` file will be opened.
 <br>
+
 <br>**4. &nbsp; Result**
 
 ![result](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/2a4a11fe-fc00-4072-8b9f-d1c94fc037e5)
