@@ -32,7 +32,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 
 **3. &nbsp; File select & export**
 
-![export](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/496aa7a2-0283-4b78-b915-0bc2b110dd6c)
+![export](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/496aa7a2-0283-4b78-b915-0bc2b110dd6c)<br>
 This step is pretty straight forward.<br>You simply select and export content from desired file by clicling `export` button.
 After doing so, the application will terminate, and newly generated `.txt` file will be opened.
 <br>
