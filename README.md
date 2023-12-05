@@ -27,7 +27,9 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
   <br>**NOTICE!**
 - Such custom file will stay in newly created directory:<br> `C:\Users\[UserName]\AppData\Local\DayZ EditorPurifier\custom\[CustomFileName]` until manually removed.
 - Files that you have imported are adding up in the process.
-- They are taken into consideration each time you perform a cleanup.
+- They are taken into consideration each time you perform a cleanup.<br>
+&nbsp;
+- If you have any custom files created, **home** screen will be displaying **browse custom files** button.
   <br>
 
 <br>**3. &nbsp; File select & export**
