@@ -61,10 +61,15 @@ public class Script {
         sourceFile = sourceFile.substring(0, sourceFile.length() - 4);
         String output = path + File.separator + sourceFile + ".txt";
 
+
+        //Adding distinct, because for whatever reason I had ONLY_ONE occurrence of doubled item,
+        //even though it wasn't duplicated in The Editor nor anywhere else
+        //this seems to have fixed it though...
+
+        List<String> lootspawns = new ArrayList<>(HAS_LOOTSPAWNS_LIST.stream().distinct().toList());
+
         try (PrintWriter writer = new PrintWriter(output)) {
-            for (String lootSpawn : HAS_LOOTSPAWNS_LIST) {
-                writer.println(lootSpawn);
-            }
+            lootspawns.forEach(writer::println);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
