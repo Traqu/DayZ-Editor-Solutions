@@ -6,7 +6,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 ![home](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/1981735d-62a5-4bc0-976f-8a347c5802e4)
 
 **1.1. &nbsp; You will be greeted by a view that allows you to import customised proto-type files.**
-- **Add** - this button will redirect you to a file chooser(**step 2.**), that will allow you to select a file, that you want to extract 'spawning-things' `class names` from.
+- **Add** - this button will redirect you to a file chooser (**step 2.**), that will allow you to select a file, that you want to extract 'spawning-things' `class names` from.
 - **Skip** - this button will redirect you to another file chooser (**step 3.**), that will allow you to choose a file, that you wish to fetch records from.
   <br>
 
