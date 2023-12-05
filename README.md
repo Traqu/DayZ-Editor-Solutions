@@ -1,6 +1,7 @@
-# DayZ Editor - Purifier <br> &nbsp; &nbsp;  by Traqu
+# DayZ Editor - Purifier <br> &nbsp; &nbsp;  created by Traqu
 ___
 The purpose of this application is to automate the 'cleansing' of exported MapGroupPos.xml files from records that do not have assigned spawn points.<br>
+<br>
 **1. &nbsp; Home screen**
 
 ![home](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/1981735d-62a5-4bc0-976f-8a347c5802e4)
@@ -17,7 +18,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
  - Simply choose a file, that you want to do import from.
  <br>
  - You can use the MapGroupProto file if your custom map has one
- &nbsp;- _example_:`mpmissions/takistan/MapGroupProto.xml`
+ &nbsp;- **example**:`mpmissions/takistan/MapGroupProto.xml`
  - If such a file does not exist, simply select a file that will contain the desired class names.
  &nbsp;- this can be self-prepared
  &nbsp;- the only condition is that each line has to contain: `<group name="` string at the beginning
