@@ -25,7 +25,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 - After you have chosen the file, you will be redirected to **step 3.**
   
   <br>**NOTICE!**
-- Such custom file will stay in newly created directory:<br> `C:\Users\[UserName]\AppData\Local\DayZ EditorPurifier\custom\[CustomFileName]` untill manualy removed.
+- Such custom file will stay in newly created directory:<br> `C:\Users\[UserName]\AppData\Local\DayZ EditorPurifier\custom\[CustomFileName]` until manually removed.
 - Files that you have imported are adding up in the process.
 - They are taken into consideration each time you perform a cleanup.
   <br>
@@ -33,7 +33,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 <br>**3. &nbsp; File select & export**
 
 ![export](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/496aa7a2-0283-4b78-b915-0bc2b110dd6c)<br>
-This step is pretty straight forward.<br>You simply select and export content from desired file by clicling `export` button.
+This step is pretty straight forward.<br>You simply select and export content from desired file by clicking `export` button.
 After doing so, the application will terminate, and newly generated `.txt` file will be opened.
 <br>
 <br>**4. &nbsp; Result**
