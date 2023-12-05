@@ -38,7 +38,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 This step is pretty straight forward.<br>
 - Here you will be taken straight to `DayZ Editor` directory.
 - Simply select and export content from desired file by clicking `export` button.
-After doing so, the application will terminate, and newly generated `.txt` file will be opened.
+After doing so, the application will terminate, and the newly generated `.txt` file will be opened.
 <br>
 
 <br>**4. &nbsp; Result**
