@@ -18,6 +18,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
  <br>
  - You can use the MapGroupProto file if your custom map has one
  &nbsp;- **example** :`mpmissions/takistan/MapGroupProto.xml`
+ - 
  - If such a file does not exist, simply select a file that will contain the desired class names.
  &nbsp;- this can be self-prepared
  &nbsp;- the only condition is that each line has to contain: `<group name="` string at the beginning
