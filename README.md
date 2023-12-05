@@ -17,14 +17,14 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 - Simply choose a file, that you want to do import from.
   <br>
 - You can use the MapGroupProto file if your custom map has one
-&nbsp; - example:`mpmissions/takistan/MapGroupProto.xml`
+ &nbsp; - example: `mpmissions/takistan/MapGroupProto.xml`
 - If such a file does not exist, simply select a file that will contain the desired class names.
 - this can be self-prepared
 - the only condition is that each line has to contain: `<group name="` string at the beginning
   <br>
 - After you have chosen the file, you will be redirected to **step 3.**
   <br>
-  **NOTICE!**
+  <br>**NOTICE!**
 - Such custom file will stay in newly created directory: `` untill manualy removed.
 - Files that you have imported are adding up in the process.
 - They are taken into consideration each time you perform a cleanup.
