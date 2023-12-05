@@ -1,7 +1,7 @@
 # DayZ Editor - Purifier <br> &nbsp; &nbsp;  by Traqu
 ___
 The purpose of this application is to automate the 'cleansing' of exported MapGroupPos.xml files from records that do not have assigned spawn points.<br>
-**1. &nbsp; Home screen**
+<br>**1. &nbsp; Home screen**
 
 ![home](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/1981735d-62a5-4bc0-976f-8a347c5802e4)
 
@@ -10,7 +10,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 - **Skip** - this button will redirect you to another file chooser (**step 3.**), that will allow you to choose a file, that you wish to fetch records from.
   <br>
 
-**2. &nbsp; Custom file importer**
+<br>**2. &nbsp; Custom file importer**
 
 ![addCustom](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/f8f3c13f-65a2-4165-a932-8aafe0a99145)
 - Here you will be taken to you **Desktop**.
@@ -30,13 +30,13 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 - They are taken into consideration each time you perform a cleanup.
   <br>
 
-**3. &nbsp; File select & export**
+<br>**3. &nbsp; File select & export**
 
 ![export](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/496aa7a2-0283-4b78-b915-0bc2b110dd6c)<br>
 This step is pretty straight forward.<br>You simply select and export content from desired file by clicling `export` button.
 After doing so, the application will terminate, and newly generated `.txt` file will be opened.
 <br>
-**4. &nbsp; Result**
+<br>**4. &nbsp; Result**
 
 ![result](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/2a4a11fe-fc00-4072-8b9f-d1c94fc037e5)
 
