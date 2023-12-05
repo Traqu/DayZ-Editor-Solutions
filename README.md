@@ -30,7 +30,6 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 - They are taken into consideration each time you perform a cleanup. 
 <br>
 
-
 **3. &nbsp; File select & export**
 
 ![export](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/496aa7a2-0283-4b78-b915-0bc2b110dd6c)
