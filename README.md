@@ -1,4 +1,4 @@
-# DayZ Editor - Purifier <br> &nbsp; &nbsp;  by Traqu
+# DayZ Editor - Purifier <br> &nbsp; &nbsp;  created by Traqu
 ___
 The purpose of this application is to automate the 'cleansing' of exported MapGroupPos.xml files from records that do not have assigned spawn points.<br>
 <br>**1. &nbsp; Home screen**
