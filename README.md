@@ -1,7 +1,47 @@
 # DayZ Editor - Purifier <br> &nbsp; &nbsp;  created by Traqu
 ___
-The purpose of this application is to automate the 'cleansing' of exported MapGroupPos.xml files from records that do not have assigned spawn points.<br>
-<br>**1. &nbsp; Home screen**
+The purpose of this application is to automate the 'cleansing' of exported MapGroupPos.xml files from records that do not have assigned spawn points.
+
+
+
+## Before you start<br>
+
+<br>**0. &nbsp; Download**
+- First step is downloading the app from this GitHub repository.
+- To do that enter this link https://github.com/TraquPjatk/DayZ-Editor-Purifier/tree/main/Executable.
+
+![download](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/4ad2bff2-95c9-4625-bd45-2cf55ad11c46)
+- You will be redirected to a directory containing the latest release of the application. 
+
+![download_2](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/76f98d04-83a6-4e6c-bcd7-b235c41d2288)
+- Here you can either click on `View raw text` or `Download symbol` on the right.
+- After you have downloaded application I advise to move it over to your Desktop and run it.
+
+<br>**1. &nbsp; Windows defender**
+- The application will always be flagged as malicious the first time it is launched, as it does not have a certificate.<br>
+
+![defender](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/437f3839-711b-4442-8a65-507b997ce21c)
+- The solution is to simply click on `More information` underlined text and allow explicitly.
+
+![defender_2](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/81ffe342-ceb4-4b6c-bc04-20cfc690a588)
+- 
+<br>**2. &nbsp; Java runtime environment**
+- You may see Java pop-up window titled **Error Occurred**<br>
+- What it says, is that you basically do not have necessary stuff installed to run this app.
+ 
+![JRE](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/c9fc9183-dce2-4c14-a9fa-d178324f793e)
+- To solve this problem visit this link: https://www.oracle.com/pl/java/technologies/downloads/#jdk21-windows.
+
+![jdk_download](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/2a2ed17e-d4de-4722-b067-115227f01e71)
+- Download suitable file.
+- - `JDK21 > Windows > x64 Installer`
+- - - **Any newer version of JRE than 16.0.1. (included) will work just fine.**
+- Run the installation.
+<br>
+- After the installation is done you can run the programme again.
+
+## Application manual
+ <br>**1. &nbsp; Home screen**
 
 ![home](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/1981735d-62a5-4bc0-976f-8a347c5802e4)
 
