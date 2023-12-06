@@ -71,7 +71,20 @@ public class Script {
         try (PrintWriter writer = new PrintWriter(output)) {
             lootspawns.forEach(writer::println);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(output);
+            if (new File(path).mkdirs()) {
+                System.out.println("Created - [" + path + "].");
+            }
+            try (PrintWriter writer = new PrintWriter(output)) {
+                lootspawns.forEach(writer::println);
+            } catch (IOException e1) {
+                throw new RuntimeException("Missing DayZ Editor directory");
+            }
+            try {
+                Desktop.getDesktop().open(new File(output));
+            } catch (IOException e1) {
+                throw new RuntimeException(e);
+            }
         }
         try {
             Desktop.getDesktop().open(new File(output));
