@@ -85,6 +85,6 @@ After doing so, the application will terminate, and the newly generated `.txt` f
 
 ![result](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/2a4a11fe-fc00-4072-8b9f-d1c94fc037e5)
 
-This can be copied over to `mapgrouppos.txt` in your server directory.
+This can be copied over to `mapgrouppos.xml` in your server directory.
 
 ---
