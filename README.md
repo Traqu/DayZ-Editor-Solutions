@@ -53,7 +53,7 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 <br>**2. &nbsp; Custom file importer**
 
 ![addCustom](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/f8f3c13f-65a2-4165-a932-8aafe0a99145)
-- Here you will be taken to you **Desktop**.
+- Here you will be taken to your **Desktop**.
 - Simply choose a file, that you want to do import from.
   <br>
 - You can use the MapGroupProto file if your custom map has one<br>
