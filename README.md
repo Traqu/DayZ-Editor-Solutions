@@ -34,8 +34,8 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 
 ![jdk_download](https://github.com/TraquPjatk/DayZ-Editor-Purifier/assets/101177758/2a2ed17e-d4de-4722-b067-115227f01e71)
 - Download suitable file.
-- - `JDK21 > Windows > x64 Installer`
-- - - **Any newer version of JRE than 16.0.1. (included) will work just fine.**
+  - `JDK21 > Windows > x64 Installer`
+    - **Any newer version of JRE than 16.0.1. (included) will work just fine.**
 - Run the installation.
 <br>
 - After the installation is done you can run the programme again.
@@ -59,9 +59,9 @@ The purpose of this application is to automate the 'cleansing' of exported MapGr
 - You can use the MapGroupProto file if your custom map has one<br>
 &nbsp;- **example**: `mpmissions/takistan/MapGroupProto.xml`
 - If such a file does not exist, simply select a file that will contain the desired class names.
-- this can be self-prepared
-- the only condition is that each line has to contain: `<group name="` string at the beginning
-  <br>
+  - this can be self-prepared
+  - the only condition is that each line has to contain: `<group name="` string at the beginning
+    <br>
 - After you have chosen the file, you will be redirected to **step 3.**
   
   <br>**NOTICE!**
