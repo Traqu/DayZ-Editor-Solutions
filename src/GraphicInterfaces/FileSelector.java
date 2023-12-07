@@ -1,6 +1,7 @@
 package GraphicInterfaces;
 
 import GraphicInterfaces.FileChoosers.FileChooser;
+import Utilities.VersionReader;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -9,7 +10,7 @@ import java.util.Objects;
 
 public class FileSelector extends JFrame {
     public static final JPanel PANEL = new JPanel();
-    final private static String APPLICATION_TITLE = " Choose file from which you want to extract spawns";
+    final private static String APPLICATION_TITLE = " Choose file from which you want to extract spawns" + VersionReader.getVersion();
 
     public FileSelector() {
         try {
