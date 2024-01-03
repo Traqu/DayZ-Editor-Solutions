@@ -1,0 +1,7 @@
+Version 1.4. - 03.01.24.
+- Added "Delete custom files" button, within new optionalButtonPanel
+    - This button upon interaction will automatically remove every custom .xml extension added to your extracting tool.
+    - Besides that, it will work just like skipping button, and take you to extraction view.
+- Changed prompt text in initial view
+
+- TODO, option to choose whether you want to source from the custom files or not, despite them having been added to the pool.

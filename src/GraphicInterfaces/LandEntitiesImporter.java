@@ -22,7 +22,7 @@ public class LandEntitiesImporter {
                  UnsupportedLookAndFeelException exception) {
             throw new RuntimeException(exception);
         }
-        JFrame frame = new JFrame(" Dayz Editor Purifier" + VersionReader.getVersion());
+        JFrame frame = new JFrame(" DayZ Editor Purifier" + VersionReader.getVersion());
         frame.setResizable(false);
         JPanel anchorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         frame.add(anchorPanel);
@@ -37,7 +37,7 @@ public class LandEntitiesImporter {
 
                 \t<group name="CLASSNAME"[optional characters]
 
-                 All other lines will be ignored.    Once added, they will stay forever.""");
+                 All other lines will be ignored. Once added, they will stay, until manually removed.""");
         prompt.setFocusable(false);
         prompt.setEditable(false);
         JButton skip = new JButton("Skip");
@@ -46,20 +46,28 @@ public class LandEntitiesImporter {
         prompt.setBackground(new Color(240, 240, 240));
         prompt.setBorder(BorderFactory.createRaisedSoftBevelBorder());
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        JPanel optionalButtonPanel = new JPanel(new GridLayout(2, 1));
         anchorPanel.add(buttonPanel);
-        Dimension buttonsSize = new Dimension(140, 50);
-        add.setPreferredSize(buttonsSize);
-        skip.setPreferredSize(buttonsSize);
+        Dimension mainButtonsSize = new Dimension(140, 50);
+        Dimension optionalButtonsSize = new Dimension(140, 50);
+        add.setPreferredSize(mainButtonsSize);
+        skip.setPreferredSize(mainButtonsSize);
         buttonPanel.add(add);
         File customDirectory = new File(System.getProperty("user.home") + "\\AppData\\Local\\DayZ EditorPurifier\\custom");
         if (new File(customDirectory.toURI()).exists()) {
-            if ((customDirectory.listFiles().length != 0)){
+            if ((Objects.requireNonNull(customDirectory.listFiles()).length != 0)) {
                 JButton openCustomDirectory = new JButton("Browse custom files");
+                JButton wipeCustomDirectory = new JButton("Delete custom files");
                 buttonPanel.add(Box.createHorizontalStrut(3));
-                buttonPanel.add(openCustomDirectory);
+                buttonPanel.add(optionalButtonPanel);
+                optionalButtonPanel.setBackground(Color.BLACK);
+                optionalButtonPanel.add(openCustomDirectory);
+                optionalButtonPanel.add(wipeCustomDirectory);
+                openCustomDirectory.setFocusable(false);
+                wipeCustomDirectory.setFocusable(false);
                 buttonPanel.add(Box.createHorizontalStrut(3));
-                openCustomDirectory.setPreferredSize(new Dimension(buttonsSize.width + 9, buttonsSize.height));
-                openCustomDirectory.setFont(FONT_BAGHDAD);
+                setupOptionalButtons(optionalButtonsSize, openCustomDirectory);
+                setupOptionalButtons(optionalButtonsSize, wipeCustomDirectory);
                 openCustomDirectory.addActionListener(e -> {
 
                     try {
@@ -68,11 +76,25 @@ public class LandEntitiesImporter {
                         throw new RuntimeException(ex);
                     }
                 });
+                wipeCustomDirectory.addActionListener(e -> {
+
+                    File[] files = customDirectory.listFiles();
+                    if (files != null) {
+                        for (File file : files) {
+                            if(file.delete()){
+                                System.out.println("Custom file removed: " + file.getName());
+                            }
+                        }
+                    }
+
+                    skip.doClick();
+
+                });
             } else {
-                buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * buttonsSize.width - 2 * 28));
+                buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * mainButtonsSize.width - 2 * 28));
             }
         } else {
-            buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * buttonsSize.width - 2 * 28));
+            buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * mainButtonsSize.width - 2 * 28));
         }
         buttonPanel.add(skip);
         add.setFocusable(false);
@@ -102,6 +124,12 @@ public class LandEntitiesImporter {
             frame.dispose();
             new FileSelector();
         });
+    }
+
+
+    private static void setupOptionalButtons(Dimension buttonsSize, JButton openCustomDirectory) {
+        openCustomDirectory.setPreferredSize(new Dimension(buttonsSize.width + 9, buttonsSize.height / 2));
+        openCustomDirectory.setFont(FONT_BAGHDAD);
     }
 
     private static void setupFrame(JFrame frame, ImageIcon logo, int DESKTOP_WIDTH, int DESKTOP_HEIGHT, Dimension dimension) {
