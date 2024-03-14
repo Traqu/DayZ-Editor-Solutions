@@ -1,5 +1,6 @@
 package GraphicInterfaces;
 
+import GraphicInterfaces.Constants.UserInterfaceConstants;
 import GraphicInterfaces.FileChoosersLogic.FileChooser;
 import Utilities.PropertiesReader;
 
@@ -10,9 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class LandEntitiesImporter {
 
-    public static final Font FONT_BAGHDAD = new Font("Baghdad", Font.BOLD, 12);
+public class LandEntitiesImporter implements UserInterfaceConstants {
+
 
     public LandEntitiesImporter() {
 
@@ -26,7 +27,7 @@ public class LandEntitiesImporter {
         frame.setResizable(false);
         JPanel anchorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         frame.add(anchorPanel);
-        ImageIcon logo = new ImageIcon(Objects.requireNonNull(LandEntitiesImporter.class.getClassLoader().getResource("graphics/logo.jpg")));
+        ImageIcon logo = new ImageIcon(Objects.requireNonNull(LandEntitiesImporter.class.getClassLoader().getResource("graphics/dayz.jpg")));
         int desktopWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int desktopHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         setupFrame(frame, logo, desktopWidth, desktopHeight, new Dimension(500, 205));
@@ -48,10 +49,9 @@ public class LandEntitiesImporter {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         JPanel optionalButtonPanel = new JPanel(new GridLayout(2, 1));
         anchorPanel.add(buttonPanel);
-        Dimension mainButtonsSize = new Dimension(140, 50);
         Dimension optionalButtonsSize = new Dimension(140, 50);
-        add.setPreferredSize(mainButtonsSize);
-        skip.setPreferredSize(mainButtonsSize);
+        add.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
+        skip.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
         buttonPanel.add(add);
         File customDirectory = new File(System.getProperty("user.home") + "\\AppData\\Local\\DayZ EditorPurifier\\custom");
         if (new File(customDirectory.toURI()).exists()) {
@@ -81,7 +81,7 @@ public class LandEntitiesImporter {
                     File[] files = customDirectory.listFiles();
                     if (files != null) {
                         for (File file : files) {
-                            if(file.delete()){
+                            if (file.delete()) {
                                 System.out.println("Custom file removed: " + file.getName());
                             }
                         }
@@ -91,10 +91,10 @@ public class LandEntitiesImporter {
 
                 });
             } else {
-                buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * mainButtonsSize.width - 2 * 28));
+                buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * UNIFIED_BUTTON_WIDTH - 2 * 28));
             }
         } else {
-            buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * mainButtonsSize.width - 2 * 28));
+            buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * UNIFIED_BUTTON_HEIGTH - 2 * 28));
         }
         buttonPanel.add(skip);
         add.setFocusable(false);

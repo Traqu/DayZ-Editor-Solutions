@@ -10,29 +10,33 @@ public class PropertiesReader {
 
     }
 
-//    public static String getProperty(String propertyName) {
-//        try {
-//            property.load(PropertiesReader.class.getClassLoader().getResourceAsStream(".properties"));
-//            return property.getProperty(propertyName);
-//
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//    }
-    public static String getVersion(boolean formatToTitle){
+    public static String getProperty(String propertyName) {
         try {
             property.load(PropertiesReader.class.getClassLoader().getResourceAsStream(".properties"));
-            String prefix = "    (Version ";
-            String suffix = ")";
-            return prefix + property.getProperty("version") + suffix;
+            return property.getProperty(propertyName);
 
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
         }
     }
-    public static String getVersion(){
+
+    public static String getVersion(boolean respectTitleFormatting) {
+        String result;
+        try {
+            property.load(PropertiesReader.class.getClassLoader().getResourceAsStream(".properties"));
+            String prefix = "    (Version ";
+            String suffix = ")";
+            result = prefix + property.getProperty("version") + suffix;
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            result = null;
+        }
+        return result;
+    }
+
+    public static String getVersion() {
         try {
             property.load(PropertiesReader.class.getClassLoader().getResourceAsStream(".properties"));
             return property.getProperty("version");

@@ -2,7 +2,7 @@
   <artifact type="jar" name="DayZ Editor Purifier:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/DayZ_Editor_Purifier_jar</output-path>
     <root id="archive" name="DayZ_Editor_Purifier.jar">
-      <element id="module-output" name="DayZ Editor Purifier" />
+      <element id="module-output" name="DayZ Editor - Code Post Cleaner" />
     </root>
   </artifact>
 </component>
