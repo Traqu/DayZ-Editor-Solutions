@@ -1,7 +1,7 @@
 package GraphicInterfaces;
 
-import GraphicInterfaces.FileChoosers.FileChooser;
-import Utilities.VersionReader;
+import GraphicInterfaces.FileChoosersLogic.FileChooser;
+import Utilities.PropertiesReader;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -22,7 +22,7 @@ public class LandEntitiesImporter {
                  UnsupportedLookAndFeelException exception) {
             throw new RuntimeException(exception);
         }
-        JFrame frame = new JFrame(" DayZ Editor Purifier" + VersionReader.getVersion());
+        JFrame frame = new JFrame(" DayZ Editor Purifier" + PropertiesReader.getVersion(true));
         frame.setResizable(false);
         JPanel anchorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         frame.add(anchorPanel);
@@ -117,7 +117,7 @@ public class LandEntitiesImporter {
             fileChooserFrame.add(fileChooser);
             fileChooserFrame.pack();
             fileChooser.setFileFilter(new FileNameExtensionFilter(".xml", "xml"));
-            fileChooserFrame.setTitle("Custom file importer" + VersionReader.getVersion());
+            fileChooserFrame.setTitle("Custom file importer" + PropertiesReader.getVersion(true));
         });
 
         skip.addActionListener(e -> {

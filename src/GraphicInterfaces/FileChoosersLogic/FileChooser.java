@@ -1,4 +1,4 @@
-package GraphicInterfaces.FileChoosers;
+package GraphicInterfaces.FileChoosersLogic;
 
 import javax.swing.*;
 import java.io.File;

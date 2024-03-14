@@ -1,5 +1,6 @@
 package SupportingProgrammes.CompareFiles;
 
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,7 +13,6 @@ public class FilesComparator {
     public static void main(String[] args) {
         String file1Path = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Purifier\\resources\\protoFiles\\chernarusTest";
         String file2Path = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Purifier\\resources\\protoFiles\\livoniaTest";
-
         try {
             Map<String, Set<String>> linesFromFile1 = new HashMap<>();
             Map<String, Set<String>> linesFromFile2 = new HashMap<>();
