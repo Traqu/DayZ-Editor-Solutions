@@ -4,6 +4,6 @@ Version 1.4. - 03.01.24.
     - Besides that, it will work just like skipping button, and take you to extraction view.
 - Changed prompt text in initial view
 ***
-Version 1.4.1. - 14.03.24.
+Version 1.4.1. / 1.4.2. - 14.03.24.
 - Developer update
 
