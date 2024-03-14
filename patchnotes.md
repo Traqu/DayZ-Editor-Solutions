@@ -7,5 +7,5 @@
 **Version 1.4.1. - 14.03.24.**
 - Code structure update.
 
-**Version 1.4.2. - 14.03.24.**
+**Version 1.5.0. - 14.03.24.**
 - Added tool selection window.
