@@ -1,15 +1,16 @@
 package Logic;
 
+import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
+
 import java.awt.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.List;
 
-public class Script {
-    public static final String USER_PATH = System.getProperty("user.home");
-    private static final String CUSTOM_RESOURCES_SUB_PATH = "\\AppData\\Local\\DayZ EditorPurifier\\custom";
-    private static final String CUSTOM_RESOURCES_PATH = USER_PATH + CUSTOM_RESOURCES_SUB_PATH;
+
+
+public class ProtoExtractor implements UserPathConstants {
     public static final String LIVONIA = "livonia";
     public static final String CHERNARUS = "chernarus";
 
@@ -17,7 +18,7 @@ public class Script {
     private final List<String> HAS_LOOTSPAWNS_LIST = new ArrayList<>();
     private final Set<String> HAS_LOOTSPAWNS_SET = new HashSet<>();
 
-    public Script(String filePath, String sourceFile) throws FileNotFoundException {
+    public ProtoExtractor(String filePath, String sourceFile) throws FileNotFoundException {
         System.out.println("Extracting from: " + filePath);
         List<String> placedObjects;
 
@@ -56,10 +57,10 @@ public class Script {
 
         }));
 
-        String path = USER_PATH + "\\Documents\\DayZ\\Editor";
+
 
         sourceFile = sourceFile.substring(0, sourceFile.length() - 4);
-        String output = path + File.separator + sourceFile + ".txt";
+        String output = DAYZ_EDITOR_PATH + File.separator + sourceFile + ".txt";
 
 
         //Adding distinct, because for whatever reason I had ONLY_ONE occurrence of doubled item,
@@ -72,8 +73,8 @@ public class Script {
             lootspawns.forEach(writer::println);
         } catch (IOException e) {
             System.out.println(output);
-            if (new File(path).mkdirs()) {
-                System.out.println("Created - [" + path + "].");
+            if (new File(DAYZ_EDITOR_PATH).mkdirs()) {
+                System.out.println("Created - [" + DAYZ_EDITOR_PATH + "].");
             }
             try (PrintWriter writer = new PrintWriter(output)) {
                 lootspawns.forEach(writer::println);

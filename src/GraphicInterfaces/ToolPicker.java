@@ -1,6 +1,7 @@
 package GraphicInterfaces;
 
-import GraphicInterfaces.Constants.UserInterfaceConstants;
+import GraphicInterfaces.Constants.Enums.CallOrigin;
+import GraphicInterfaces.Constants.Interfaces.UserInterfaceConstants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static GraphicInterfaces.Constants.Enums.CallOrigin.TOOL_PICKER;
+
 public class ToolPicker extends JFrame implements UserInterfaceConstants {
 
     private static final Dimension UNIFIED_BTN_DIM = new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH);
+    private final CallOrigin INVOCATION_ORIGIN = TOOL_PICKER;
 
     public ToolPicker(String title) throws HeadlessException {
         super(title);
@@ -57,9 +61,12 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
             button.setBorder(BorderFactory.createLineBorder(new Color(166, 192, 222), 1));
         }
 
+        toolSelectionPanel.add(eventsButton);
+        toolSelectionPanel.add(protoButton);
+
         eventsButton.addActionListener(actionEvent -> {
             dispose();
-            new DynamicEventParser();
+            new FileChooser(INVOCATION_ORIGIN);
         });
 
         protoButton.addActionListener(actionEvent -> {
@@ -68,7 +75,5 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
         });
 
 
-        toolSelectionPanel.add(eventsButton);
-        toolSelectionPanel.add(protoButton);
     }
 }

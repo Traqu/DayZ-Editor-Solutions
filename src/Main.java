@@ -1,4 +1,3 @@
-import GraphicInterfaces.LandEntitiesImporter;
 import GraphicInterfaces.ToolPicker;
 import Utilities.PropertiesReader;
 
@@ -7,6 +6,5 @@ public class Main {
 
         new ToolPicker("Choose your tool" + PropertiesReader.getVersion(true));
 
-//        new LandEntitiesImporter();
     }
 }

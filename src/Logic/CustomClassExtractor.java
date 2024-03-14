@@ -1,13 +1,13 @@
 package Logic;
 
+import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomClassExtractor {
-    private static final String USER_HOME_PATH = System.getProperty("user.home");
-    private static final String RESOURCES_SUB_PATH = "\\AppData\\Local\\DayZ EditorPurifier\\custom";
-    private static final String RESOURCES_PATH = USER_HOME_PATH + RESOURCES_SUB_PATH;
+
+public class CustomClassExtractor implements UserPathConstants {
 
     public CustomClassExtractor(String path) throws IOException {
         createDirectoryIfAbsent();
@@ -16,10 +16,10 @@ public class CustomClassExtractor {
     }
 
     private static void createDirectoryIfAbsent() {
-        File customResourceFile = new File(RESOURCES_PATH);
+        File customResourceFile = new File(CUSTOM_RESOURCES_PATH);
         if (!customResourceFile.exists()) {
             if (customResourceFile.mkdirs()) {
-                System.out.println("Created new directory: " + RESOURCES_PATH);
+                System.out.println("Created new directory: " + CUSTOM_RESOURCES_PATH);
             }
         }
     }
@@ -46,7 +46,7 @@ public class CustomClassExtractor {
 
     public static void importToResourceFile(String fileName, List<String> linesList) {
         try {
-            PrintWriter customResourceWriter = new PrintWriter(RESOURCES_PATH + "\\" + fileName);
+            PrintWriter customResourceWriter = new PrintWriter(CUSTOM_RESOURCES_PATH + "\\" + fileName);
             for (int i = 0; i < linesList.size(); i++) {
                 String line = linesList.get(i);
                 String[] split = line.split("\"");

@@ -1,19 +1,30 @@
 package GraphicInterfaces.FileChoosersLogic;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import GraphicInterfaces.FileSelector;
+import GraphicInterfaces.Constants.Enums.CallOrigin;
 import Logic.CustomClassExtractor;
-import Logic.Script;
+import Logic.DynamicEventParser;
+import Logic.ProtoExtractor;
+import org.xml.sax.SAXException;
+
+import static GraphicInterfaces.Constants.Enums.CallOrigin.OTHER;
+
 
 public class FileChooser extends JFileChooser {
-    private boolean isCustomFileChooser = false;
-    private JFrame frame = null;
+    private final CallOrigin INVOCATION_ORIGIN = OTHER;
 
-    public FileChooser(String defaultDirectoryPath) {
+    private boolean isCustomFileChooser = false;
+    private JFrame frame;
+
+    private CallOrigin invocationOrigin;
+
+    public FileChooser(String defaultDirectoryPath, CallOrigin invocationOrigin) {
+        this.invocationOrigin = invocationOrigin;
         setCurrentDirectory(new File(defaultDirectoryPath));
         this.setApproveButtonText("Export");
         this.setApproveButtonToolTipText("Export from selected file");
@@ -30,10 +41,9 @@ public class FileChooser extends JFileChooser {
     @Override
     public void approveSelection() {
         if (!isCustomFileChooser) {
-            try {
-                new Script(this.getSelectedFile().getPath(), getSelectedFile().getName());
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+            switch (invocationOrigin){
+                case TOOL_PICKER -> createDynamicEventParser();
+                case OTHER -> createProtoExtractor();
             }
         } else {
             try {
@@ -42,14 +52,30 @@ public class FileChooser extends JFileChooser {
                 throw new RuntimeException(e);
             }
             frame.setVisible(false);
-            new FileSelector();
+                new GraphicInterfaces.FileChooser(INVOCATION_ORIGIN);
+        }
+    }
+
+    private void createDynamicEventParser() {
+        try {
+            new DynamicEventParser(this.getSelectedFile().getPath(), this.getSelectedFile().getName());
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void createProtoExtractor() {
+        try {
+            new ProtoExtractor(this.getSelectedFile().getPath(), this.getSelectedFile().getName());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void cancelSelection() {
         if (isCustomFileChooser) {
-            new FileSelector();
+                new GraphicInterfaces.FileChooser(INVOCATION_ORIGIN);
             frame.setVisible(false);
         } else {
             System.exit(0);

@@ -1,7 +1,7 @@
 package GraphicInterfaces;
 
-import GraphicInterfaces.Constants.UserInterfaceConstants;
-import GraphicInterfaces.FileChoosersLogic.FileChooser;
+import GraphicInterfaces.Constants.Enums.CallOrigin;
+import GraphicInterfaces.Constants.Interfaces.UserInterfaceConstants;
 import Utilities.PropertiesReader;
 
 import javax.swing.*;
@@ -11,9 +11,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
+import static GraphicInterfaces.Constants.Enums.CallOrigin.OTHER;
+
 
 public class LandEntitiesImporter implements UserInterfaceConstants {
 
+    private final CallOrigin INVOCATION_ORIGIN = OTHER;
 
     public LandEntitiesImporter() {
 
@@ -112,7 +115,7 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                 throw new RuntimeException(exception);
             }
             JFrame fileChooserFrame = new JFrame();
-            FileChooser fileChooser = new FileChooser(System.getProperty("user.home") + File.separator + "desktop", fileChooserFrame);
+            GraphicInterfaces.FileChoosersLogic.FileChooser fileChooser = new GraphicInterfaces.FileChoosersLogic.FileChooser(System.getProperty("user.home") + File.separator + "desktop", fileChooserFrame);
             setupFrame(fileChooserFrame, logo, desktopWidth, desktopHeight, new Dimension(600, 435));
             fileChooserFrame.add(fileChooser);
             fileChooserFrame.pack();
@@ -122,7 +125,7 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
 
         skip.addActionListener(e -> {
             frame.dispose();
-            new FileSelector();
+                new FileChooser(INVOCATION_ORIGIN);
         });
     }
 
