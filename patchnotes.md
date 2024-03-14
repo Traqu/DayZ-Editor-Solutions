@@ -3,5 +3,7 @@ Version 1.4. - 03.01.24.
     - This button upon interaction will automatically remove every custom .xml extension added to your extracting tool.
     - Besides that, it will work just like skipping button, and take you to extraction view.
 - Changed prompt text in initial view
+***
+Version 1.4.1. - 14.03.24.
+- Developer update
 
-- TODO, option to choose whether you want to source from the custom files or not, despite them having been added to the pool.
