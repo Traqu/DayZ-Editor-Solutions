@@ -39,6 +39,7 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
 
         /**Sets the window's location to be centered on user's screen*/
         setLocation((DESKTOP_WIDTH / 2) - (this.getWidth() / 2), DESKTOP_HEIGTH / 2 - (this.getHeight() / 2));
+        setResizable(false);
         setVisible(true);
     }
 

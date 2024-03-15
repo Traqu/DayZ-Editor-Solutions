@@ -1,4 +1,4 @@
-package Logic;
+package Utilities;
 
 import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
 

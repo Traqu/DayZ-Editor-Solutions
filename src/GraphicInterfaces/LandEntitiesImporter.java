@@ -2,6 +2,7 @@ package GraphicInterfaces;
 
 import GraphicInterfaces.Constants.Enums.CallOrigin;
 import GraphicInterfaces.Constants.Interfaces.UserInterfaceConstants;
+import GraphicInterfaces.FileChoosersLogic.FileChooserLogic;
 import Utilities.PropertiesReader;
 
 import javax.swing.*;
@@ -26,7 +27,7 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                  UnsupportedLookAndFeelException exception) {
             throw new RuntimeException(exception);
         }
-        JFrame frame = new JFrame(" DayZ Editor Purifier" + PropertiesReader.getVersion(true));
+        JFrame frame = new JFrame(" Custom class import tool" + PropertiesReader.getVersion(true));
         frame.setResizable(false);
         JPanel anchorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
         frame.add(anchorPanel);
@@ -115,11 +116,11 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                 throw new RuntimeException(exception);
             }
             JFrame fileChooserFrame = new JFrame();
-            GraphicInterfaces.FileChoosersLogic.FileChooser fileChooser = new GraphicInterfaces.FileChoosersLogic.FileChooser(System.getProperty("user.home") + File.separator + "desktop", fileChooserFrame);
+            FileChooserLogic fileChooserLogic = new FileChooserLogic(System.getProperty("user.home") + File.separator + "desktop", fileChooserFrame);
             setupFrame(fileChooserFrame, logo, desktopWidth, desktopHeight, new Dimension(600, 435));
-            fileChooserFrame.add(fileChooser);
+            fileChooserFrame.add(fileChooserLogic);
             fileChooserFrame.pack();
-            fileChooser.setFileFilter(new FileNameExtensionFilter(".xml", "xml"));
+            fileChooserLogic.setFileFilter(new FileNameExtensionFilter(".xml", "xml"));
             fileChooserFrame.setTitle("Custom file importer" + PropertiesReader.getVersion(true));
         });
 

@@ -7,30 +7,33 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import GraphicInterfaces.Constants.Enums.CallOrigin;
-import Logic.CustomClassExtractor;
-import Logic.DynamicEventParser;
-import Logic.ProtoExtractor;
+import GraphicInterfaces.FileChooser;
+import Utilities.CustomClassExtractor;
+import Utilities.DynamicEventParser;
+import Utilities.ProtoExtractor;
 import org.xml.sax.SAXException;
 
 import static GraphicInterfaces.Constants.Enums.CallOrigin.OTHER;
 
 
-public class FileChooser extends JFileChooser {
+public class FileChooserLogic extends JFileChooser {
     private final CallOrigin INVOCATION_ORIGIN = OTHER;
 
     private boolean isCustomFileChooser = false;
     private JFrame frame;
 
     private CallOrigin invocationOrigin;
+    private FileChooser invocationFileChooser;
 
-    public FileChooser(String defaultDirectoryPath, CallOrigin invocationOrigin) {
+    public FileChooserLogic(String defaultDirectoryPath, CallOrigin invocationOrigin, FileChooser thisFileChooser) {
         this.invocationOrigin = invocationOrigin;
         setCurrentDirectory(new File(defaultDirectoryPath));
         this.setApproveButtonText("Export");
         this.setApproveButtonToolTipText("Export from selected file");
+        invocationFileChooser = thisFileChooser;
     }
 
-    public FileChooser(String defaultDirectoryPath, JFrame frame) {
+    public FileChooserLogic(String defaultDirectoryPath, JFrame frame) {
         this.frame = frame;
         this.setApproveButtonText("Import");
         this.setApproveButtonToolTipText("Import from selected file");
@@ -58,7 +61,7 @@ public class FileChooser extends JFileChooser {
 
     private void createDynamicEventParser() {
         try {
-            new DynamicEventParser(this.getSelectedFile().getPath(), this.getSelectedFile().getName());
+            new DynamicEventParser(this.getSelectedFile().getPath(), invocationFileChooser);
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }

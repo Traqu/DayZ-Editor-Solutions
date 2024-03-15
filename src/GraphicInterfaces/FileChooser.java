@@ -2,6 +2,7 @@ package GraphicInterfaces;
 
 import GraphicInterfaces.Constants.Enums.CallOrigin;
 import GraphicInterfaces.Constants.Interfaces.UserInterfaceConstants;
+import GraphicInterfaces.FileChoosersLogic.FileChooserLogic;
 import Utilities.PropertiesReader;
 
 import javax.swing.*;
@@ -37,14 +38,14 @@ public class FileChooser extends JFrame implements UserInterfaceConstants {
         setLocation((DESKTOP_WIDTH / 2) - (getWidth() / 2), DESKTOP_HEIGTH / 2 - (getHeight() / 2));
         add(PANEL);
 
-        GraphicInterfaces.FileChoosersLogic.FileChooser
-                fileChooser = new GraphicInterfaces.FileChoosersLogic.FileChooser(
-                System.getProperty("user.home") + "\\Documents\\DayZ\\Editor", invocationOrigin
+        FileChooserLogic
+                fileChooserLogic = new FileChooserLogic(
+                System.getProperty("user.home") + "\\Documents\\DayZ\\Editor", invocationOrigin, this
         );
 
-        fileChooser.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
+        fileChooserLogic.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
 
-        PANEL.add(fileChooser);
+        PANEL.add(fileChooserLogic);
 
 
     }
