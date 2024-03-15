@@ -9,3 +9,6 @@
 
 **Version 1.5.0. - 14.03.24.**
 - Added tool selection window.
+
+**Version 2.0.0. - 15.03.24.**
+- Added dynamic event parsing mechanism.
