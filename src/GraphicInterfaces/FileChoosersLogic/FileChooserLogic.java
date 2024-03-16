@@ -9,8 +9,8 @@ import java.io.IOException;
 import GraphicInterfaces.Constants.Enums.CallOrigin;
 import GraphicInterfaces.FileChooser;
 import Utilities.CustomClassExtractor;
-import Utilities.DynamicEventParser;
-import Utilities.ProtoExtractor;
+import Utilities.DynamicEventAdapter;
+import Utilities.MapGroupPosExtractor;
 import org.xml.sax.SAXException;
 
 import static GraphicInterfaces.Constants.Enums.CallOrigin.OTHER;
@@ -61,7 +61,7 @@ public class FileChooserLogic extends JFileChooser {
 
     private void createDynamicEventParser() {
         try {
-            new DynamicEventParser(this.getSelectedFile().getPath(), invocationFileChooser);
+            new DynamicEventAdapter(this.getSelectedFile().getPath(), invocationFileChooser);
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new RuntimeException(e);
         }
@@ -69,7 +69,7 @@ public class FileChooserLogic extends JFileChooser {
 
     private void createProtoExtractor() {
         try {
-            new ProtoExtractor(this.getSelectedFile().getPath(), this.getSelectedFile().getName());
+            new MapGroupPosExtractor(this.getSelectedFile().getPath(), this.getSelectedFile().getName());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

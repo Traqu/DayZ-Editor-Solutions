@@ -10,15 +10,13 @@ import java.util.List;
 
 
 
-public class ProtoExtractor implements UserPathConstants {
-    public static final String LIVONIA = "livonia";
-    public static final String CHERNARUS = "chernarus";
+public class MapGroupPosExtractor implements UserPathConstants {
 
 
     private final List<String> HAS_LOOTSPAWNS_LIST = new ArrayList<>();
     private final Set<String> HAS_LOOTSPAWNS_SET = new HashSet<>();
 
-    public ProtoExtractor(String filePath, String sourceFile) throws FileNotFoundException {
+    public MapGroupPosExtractor(String filePath, String sourceFile) throws FileNotFoundException {
         System.out.println("Extracting from: " + filePath);
         List<String> placedObjects;
 

@@ -12,16 +12,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DynamicEventParser implements UserPathConstants {
+public class DynamicEventAdapter implements UserPathConstants {
 
-    public DynamicEventParser(String filePath, FileChooser fileChooser) throws ParserConfigurationException, IOException, SAXException {
+    public DynamicEventAdapter(String filePath, FileChooser fileChooser) throws ParserConfigurationException, IOException, SAXException {
 
         String output = filePath;
 
@@ -66,7 +63,6 @@ public class DynamicEventParser implements UserPathConstants {
     }
 
 
-
     private static StringBuilder parseFile(NodeList itemList) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -93,7 +89,16 @@ public class DynamicEventParser implements UserPathConstants {
             }
         }
 
+        List<String> spawnCabableObjectsList = readProtoClassNames();
+
         for (InGameObject inGameObject : inGameObjectsList) {
+            boolean canSpawnLoot = false;
+
+            for (String spawnCabableObject : spawnCabableObjectsList) {
+                if (inGameObject.getObjectClassName().equals(spawnCabableObject)) {
+                    canSpawnLoot = true;
+                }
+            }
 
             if (entry++ == 0) {
                 x = inGameObject.x;
@@ -111,21 +116,86 @@ public class DynamicEventParser implements UserPathConstants {
                 inGameObject.z = Math.round(inGameObject.z * 100.0) / 100.0;
             }
 
-            stringBuilder.append("<child type=\"")
-                    .append(inGameObject.getClassName())
-                    .append("\" x=\"")
-                    .append(inGameObject.x)
-                    .append("\" z=\"")
-                    .append(inGameObject.z)
-                    .append("\" a=\"")
-                    .append(inGameObject.a)
-                    .append("\" y=\"")
-                    .append(inGameObject.y)
-                    .append("\"/>\n");
+            if (canSpawnLoot) {
+                stringBuilder.append("<child type=\"")
+                        .append(inGameObject.getObjectClassName()).append(" deloot=\"1\" lootmax=\"1\" lootmin=\"1\"")
+                        .append("\" x=\"")
+                        .append(inGameObject.x)
+                        .append("\" z=\"")
+                        .append(inGameObject.z)
+                        .append("\" a=\"")
+                        .append(inGameObject.a)
+                        .append("\" y=\"")
+                        .append(inGameObject.y)
+                        .append("\"/>\n");
+            } else {
+                stringBuilder.append("<child type=\"")
+                        .append(inGameObject.getObjectClassName())
+                        .append("\" x=\"")
+                        .append(inGameObject.x)
+                        .append("\" z=\"")
+                        .append(inGameObject.z)
+                        .append("\" a=\"")
+                        .append(inGameObject.a)
+                        .append("\" y=\"")
+                        .append(inGameObject.y)
+                        .append("\"/>\n");
+            }
         }
 
         return stringBuilder;
     }
+
+    private static List<String> readProtoClassNames() {   //TODO
+        List<String> spawnCapableClassesList = new ArrayList<>();
+        File file = new File(CUSTOM_RESOURCES_PATH);
+        File[] customFiles = file.listFiles();
+
+        readSpawnsCapableClassesFromMission(spawnCapableClassesList, LIVONIA);
+        readSpawnsCapableClassesFromMission(spawnCapableClassesList, CHERNARUS);
+        if (customFiles != null) {
+            for (File customFile : customFiles) {
+                System.out.println("Processing custom files: " + customFile);
+                readSpawnsCapableClassesFromMission(spawnCapableClassesList, customFile);
+            }
+        }
+
+        return spawnCapableClassesList;
+    }
+
+    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList,  File customFile) {
+        BufferedReader customFilesReader = null;
+        try {
+            customFilesReader = new BufferedReader(new FileReader(customFile));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String line;
+        while (true) {
+            try {
+                if ((line = customFilesReader.readLine()) == null) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            spawnCapableClassesList.add(line);
+        }
+    }
+
+    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, String map) {
+        try (InputStream inputStream = DynamicEventAdapter.class.getResourceAsStream("/protoFiles/" + map)) {
+                if (inputStream != null) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        spawnCapableClassesList.add(line);
+                    }
+                } else {
+                    throw new RuntimeException("Nie można odczytać zasobów protoFiles.");
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     private static Document getDocument(String path) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

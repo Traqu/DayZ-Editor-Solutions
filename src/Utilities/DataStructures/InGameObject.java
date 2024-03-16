@@ -15,7 +15,7 @@ public class InGameObject {
         this.z = Double.parseDouble(z);
     }
 
-    public String getClassName() {
+    public String getObjectClassName() {
 
         return className;
     }
