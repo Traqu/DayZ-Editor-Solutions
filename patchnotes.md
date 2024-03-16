@@ -11,9 +11,12 @@
 - Added tool selection window.
 
 **Version 2.0.0. - 15.03.24.**
-- Added dynamic event parsing mechanism.
+- Added dynamic event adapter mechanism.
 
 **Version 2.0.1. - 16.03.24**
 - Changed tool names.
+
+ **Version 2.1.0. - 16.03.24**
+- Now Event adapter will respect mapgroupproto entries (also custom), and automatically include `deloot,minloot,maxloot` fields.
 
 ****
