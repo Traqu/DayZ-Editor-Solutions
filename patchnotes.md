@@ -12,3 +12,8 @@
 
 **Version 2.0.0. - 15.03.24.**
 - Added dynamic event parsing mechanism.
+
+**Version 2.0.1. - 16.03.24**
+- Changed tool names.
+
+****
