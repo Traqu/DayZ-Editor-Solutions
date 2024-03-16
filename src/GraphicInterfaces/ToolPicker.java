@@ -50,9 +50,9 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
         JPanel toolSelectionPanel = new JPanel();
         add(toolSelectionPanel);
 
-        JButton eventsButton = new JButton("Event parser");
+        JButton eventsButton = new JButton("Event adapter");
         buttonList.add(eventsButton);
-        JButton protoButton = new JButton("Proto parser");
+        JButton protoButton = new JButton("Proto extractor");
         buttonList.add(protoButton);
 
         for (JButton button : buttonList) {
