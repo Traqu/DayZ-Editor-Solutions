@@ -22,4 +22,7 @@
 **Version 2.2.0. - 18.03.24**
 - Fixed issue, where event adapter tool was not including quotation sign, behind class names for items that had `deloot,minloot,maxloot`.
 
+**Version 2.2.1. - 18.03.24**
+- Changed text on one of the buttons in ToolPicker to more accurately represent actual usage of that tool. 
+
 ****
