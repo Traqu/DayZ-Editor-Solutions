@@ -118,7 +118,7 @@ public class DynamicEventAdapter implements UserPathConstants {
 
             if (canSpawnLoot) {
                 stringBuilder.append("<child type=\"")
-                        .append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1\"")
+                        .append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1")
                         .append("\" x=\"")
                         .append(inGameObject.x)
                         .append("\" z=\"")
