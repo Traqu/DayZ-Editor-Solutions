@@ -16,7 +16,10 @@
 **Version 2.0.1. - 16.03.24**
 - Changed tool names.
 
- **Version 2.1.0. - 16.03.24**
+**Version 2.1.0. - 16.03.24**
 - Now Event adapter will respect mapgroupproto entries (also custom), and automatically include `deloot,minloot,maxloot` fields.
+
+**Version 2.2.0. - 18.03.24**
+- Fixed issue, where event adapter tool was not including quotation sign, behind class names for items that had `deloot,minloot,maxloot`.
 
 ****
