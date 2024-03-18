@@ -2,7 +2,7 @@ package GraphicInterfaces;
 
 import GraphicInterfaces.Constants.Enums.CallOrigin;
 import GraphicInterfaces.Constants.Interfaces.UserInterfaceConstants;
-import GraphicInterfaces.FileChoosersLogic.FileChooserLogic;
+import GraphicInterfaces.FileChoosersLogic.FileChooser;
 import Utilities.PropertiesReader;
 
 import javax.swing.*;
@@ -28,14 +28,20 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
             throw new RuntimeException(exception);
         }
         JFrame frame = new JFrame(" Custom class import tool" + PropertiesReader.getVersion(true));
+
         frame.setResizable(false);
+
         JPanel anchorPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+
         frame.add(anchorPanel);
+
         ImageIcon logo = new ImageIcon(Objects.requireNonNull(LandEntitiesImporter.class.getClassLoader().getResource("graphics/dayz.jpg")));
+
         int desktopWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int desktopHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         setupFrame(frame, logo, desktopWidth, desktopHeight, new Dimension(500, 205));
-        JButton add = new JButton("Add");
+
+        JButton addButton = new JButton("Add");
         JTextArea prompt = new JTextArea("""
                  You can add custom classes file.
                  Provide file in xml format, containing lines corresponding to the example below:\s
@@ -45,34 +51,41 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                  All other lines will be ignored. Once added, they will stay, until manually removed.""");
         prompt.setFocusable(false);
         prompt.setEditable(false);
-        JButton skip = new JButton("Skip");
+
+        JButton skipButton = new JButton("Skip");
+
         anchorPanel.add(prompt);
+
         prompt.setFont(FONT_BAGHDAD);
         prompt.setBackground(new Color(240, 240, 240));
         prompt.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         JPanel optionalButtonPanel = new JPanel(new GridLayout(2, 1));
         anchorPanel.add(buttonPanel);
+
         Dimension optionalButtonsSize = new Dimension(140, 50);
-        add.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
-        skip.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
-        buttonPanel.add(add);
+        addButton.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
+        skipButton.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
+
+        buttonPanel.add(addButton);
+
         File customDirectory = new File(System.getProperty("user.home") + "\\AppData\\Local\\DayZ EditorPurifier\\custom");
         if (new File(customDirectory.toURI()).exists()) {
             if ((Objects.requireNonNull(customDirectory.listFiles()).length != 0)) {
-                JButton openCustomDirectory = new JButton("Browse custom files");
-                JButton wipeCustomDirectory = new JButton("Delete custom files");
+                JButton openCustomDirectoryButton = new JButton("Browse custom files");
+                JButton wipeCustomDirectoryButton = new JButton("Delete custom files");
                 buttonPanel.add(Box.createHorizontalStrut(3));
                 buttonPanel.add(optionalButtonPanel);
                 optionalButtonPanel.setBackground(Color.BLACK);
-                optionalButtonPanel.add(openCustomDirectory);
-                optionalButtonPanel.add(wipeCustomDirectory);
-                openCustomDirectory.setFocusable(false);
-                wipeCustomDirectory.setFocusable(false);
+                optionalButtonPanel.add(openCustomDirectoryButton);
+                optionalButtonPanel.add(wipeCustomDirectoryButton);
+                openCustomDirectoryButton.setFocusable(false);
+                wipeCustomDirectoryButton.setFocusable(false);
                 buttonPanel.add(Box.createHorizontalStrut(3));
-                setupOptionalButtons(optionalButtonsSize, openCustomDirectory);
-                setupOptionalButtons(optionalButtonsSize, wipeCustomDirectory);
-                openCustomDirectory.addActionListener(e -> {
+                setupOptionalButtons(optionalButtonsSize, openCustomDirectoryButton);
+                setupOptionalButtons(optionalButtonsSize, wipeCustomDirectoryButton);
+                openCustomDirectoryButton.addActionListener(e -> {
 
                     try {
                         Desktop.getDesktop().open(customDirectory);
@@ -80,7 +93,7 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                         throw new RuntimeException(ex);
                     }
                 });
-                wipeCustomDirectory.addActionListener(e -> {
+                wipeCustomDirectoryButton.addActionListener(e -> {
 
                     File[] files = customDirectory.listFiles();
                     if (files != null) {
@@ -91,7 +104,7 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                         }
                     }
 
-                    skip.doClick();
+                    skipButton.doClick();
 
                 });
             } else {
@@ -100,14 +113,14 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
         } else {
             buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * UNIFIED_BUTTON_HEIGTH - 2 * 28));
         }
-        buttonPanel.add(skip);
-        add.setFocusable(false);
-        skip.setFocusable(false);
-        skip.setFont(FONT_BAGHDAD);
-        add.setFont(FONT_BAGHDAD);
+        buttonPanel.add(skipButton);
+        addButton.setFocusable(false);
+        skipButton.setFocusable(false);
+        skipButton.setFont(FONT_BAGHDAD);
+        addButton.setFont(FONT_BAGHDAD);
 
 
-        add.addActionListener(e -> {
+        addButton.addActionListener(e -> {
             frame.dispose();
             try {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -116,20 +129,19 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                 throw new RuntimeException(exception);
             }
             JFrame fileChooserFrame = new JFrame();
-            FileChooserLogic fileChooserLogic = new FileChooserLogic(System.getProperty("user.home") + File.separator + "desktop", fileChooserFrame);
-            setupFrame(fileChooserFrame, logo, desktopWidth, desktopHeight, new Dimension(600, 435));
-            fileChooserFrame.add(fileChooserLogic);
+            FileChooser fileChooser = new FileChooser(System.getProperty("user.home") + File.separator + "desktop", fileChooserFrame);
+            setupFrame(fileChooserFrame, logo, desktopWidth, desktopHeight, DEFAULT_WINDOW_DIMENSION);
+            fileChooserFrame.add(fileChooser);
             fileChooserFrame.pack();
-            fileChooserLogic.setFileFilter(new FileNameExtensionFilter(".xml", "xml"));
+            fileChooser.setFileFilter(new FileNameExtensionFilter(".xml", "xml"));
             fileChooserFrame.setTitle("Custom file importer" + PropertiesReader.getVersion(true));
         });
 
-        skip.addActionListener(e -> {
+        skipButton.addActionListener(e -> {
             frame.dispose();
-                new FileChooser(INVOCATION_ORIGIN);
+            new FileChooserFrame(INVOCATION_ORIGIN);
         });
     }
-
 
     private static void setupOptionalButtons(Dimension buttonsSize, JButton openCustomDirectory) {
         openCustomDirectory.setPreferredSize(new Dimension(buttonsSize.width + 9, buttonsSize.height / 2));

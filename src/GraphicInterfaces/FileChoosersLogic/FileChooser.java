@@ -7,7 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import GraphicInterfaces.Constants.Enums.CallOrigin;
-import GraphicInterfaces.FileChooser;
+import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
+import GraphicInterfaces.FileChooserFrame;
 import Utilities.CustomClassExtractor;
 import Utilities.DynamicEventAdapter;
 import Utilities.MapGroupPosExtractor;
@@ -16,24 +17,24 @@ import org.xml.sax.SAXException;
 import static GraphicInterfaces.Constants.Enums.CallOrigin.OTHER;
 
 
-public class FileChooserLogic extends JFileChooser {
+public class FileChooser extends JFileChooser implements UserPathConstants {
     private final CallOrigin INVOCATION_ORIGIN = OTHER;
 
     private boolean isCustomFileChooser = false;
     private JFrame frame;
 
     private CallOrigin invocationOrigin;
-    private FileChooser invocationFileChooser;
+    private FileChooserFrame invocationFileChooser;
 
-    public FileChooserLogic(String defaultDirectoryPath, CallOrigin invocationOrigin, FileChooser thisFileChooser) {
+    public FileChooser(String defaultDirectoryPath, CallOrigin invocationOrigin, FileChooserFrame thisFileChooserFrame) {
         this.invocationOrigin = invocationOrigin;
         setCurrentDirectory(new File(defaultDirectoryPath));
         this.setApproveButtonText("Export");
         this.setApproveButtonToolTipText("Export from selected file");
-        invocationFileChooser = thisFileChooser;
+        invocationFileChooser = thisFileChooserFrame;
     }
 
-    public FileChooserLogic(String defaultDirectoryPath, JFrame frame) {
+    public FileChooser(String defaultDirectoryPath, JFrame frame) {
         this.frame = frame;
         this.setApproveButtonText("Import");
         this.setApproveButtonToolTipText("Import from selected file");
@@ -55,7 +56,7 @@ public class FileChooserLogic extends JFileChooser {
                 throw new RuntimeException(e);
             }
             frame.setVisible(false);
-                new GraphicInterfaces.FileChooser(INVOCATION_ORIGIN);
+                new FileChooserFrame(INVOCATION_ORIGIN);
         }
     }
 
@@ -78,7 +79,7 @@ public class FileChooserLogic extends JFileChooser {
     @Override
     public void cancelSelection() {
         if (isCustomFileChooser) {
-                new GraphicInterfaces.FileChooser(INVOCATION_ORIGIN);
+                new FileChooserFrame(INVOCATION_ORIGIN);
             frame.setVisible(false);
         } else {
             System.exit(0);

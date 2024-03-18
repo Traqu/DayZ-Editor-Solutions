@@ -2,20 +2,20 @@ package GraphicInterfaces;
 
 import GraphicInterfaces.Constants.Enums.CallOrigin;
 import GraphicInterfaces.Constants.Interfaces.UserInterfaceConstants;
-import GraphicInterfaces.FileChoosersLogic.FileChooserLogic;
+import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
+import GraphicInterfaces.FileChoosersLogic.FileChooser;
 import Utilities.PropertiesReader;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
 import java.util.Objects;
 
 
-public class FileChooser extends JFrame implements UserInterfaceConstants {
+public class FileChooserFrame extends JFrame implements UserInterfaceConstants, UserPathConstants {
     private CallOrigin invocationOrigin;
     public static final JPanel PANEL = new JPanel();
 
-    public FileChooser(CallOrigin invocationOrigin) {
+    public FileChooserFrame(CallOrigin invocationOrigin) {
         this.invocationOrigin = invocationOrigin;
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -32,20 +32,19 @@ public class FileChooser extends JFrame implements UserInterfaceConstants {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
-        Dimension DIMENSION = new Dimension(600, 435);
-        setPreferredSize(DIMENSION);
+        setPreferredSize(DEFAULT_WINDOW_DIMENSION);
         pack();
         setLocation((DESKTOP_WIDTH / 2) - (getWidth() / 2), DESKTOP_HEIGTH / 2 - (getHeight() / 2));
         add(PANEL);
 
-        FileChooserLogic
-                fileChooserLogic = new FileChooserLogic(
-                System.getProperty("user.home") + "\\Documents\\DayZ\\Editor", invocationOrigin, this
+        FileChooser
+                fileChooser = new FileChooser(
+                DAYZ_EDITOR_PATH, invocationOrigin, this
         );
 
-        fileChooserLogic.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
 
-        PANEL.add(fileChooserLogic);
+        PANEL.add(fileChooser);
 
 
     }

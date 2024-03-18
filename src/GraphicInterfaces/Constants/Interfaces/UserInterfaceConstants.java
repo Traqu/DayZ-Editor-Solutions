@@ -8,5 +8,6 @@ public interface UserInterfaceConstants {
     int UNIFIED_BUTTON_WIDTH = 140;
     int UNIFIED_BUTTON_HEIGTH = 50;
     Font FONT_BAGHDAD = new Font("Baghdad", Font.BOLD, 12);
+    Dimension DEFAULT_WINDOW_DIMENSION = new Dimension(600,435);
 
 }

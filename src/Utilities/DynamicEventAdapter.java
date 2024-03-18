@@ -1,7 +1,7 @@
 package Utilities;
 
 import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
-import GraphicInterfaces.FileChooser;
+import GraphicInterfaces.FileChooserFrame;
 import Utilities.DataStructures.InGameObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class DynamicEventAdapter implements UserPathConstants {
 
-    public DynamicEventAdapter(String filePath, FileChooser fileChooser) throws ParserConfigurationException, IOException, SAXException {
+    public DynamicEventAdapter(String filePath, FileChooserFrame fileChooserFrame) throws ParserConfigurationException, IOException, SAXException {
 
         String output = filePath;
 
@@ -28,10 +28,10 @@ public class DynamicEventAdapter implements UserPathConstants {
         NodeList itemList = dynamicEventDocument.getElementsByTagName("events");
 
         if (itemList.getLength() == 0) {
-            fileChooser.setTitle("This is not an event file!");
+            fileChooserFrame.setTitle("This is not an event file!");
             try {
                 Thread.sleep(1250);
-                fileChooser.setTitle(" Choose file from which you want to extract objects" + PropertiesReader.getVersion(true));
+                fileChooserFrame.setTitle(" Choose file from which you want to extract objects" + PropertiesReader.getVersion(true));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -118,7 +118,7 @@ public class DynamicEventAdapter implements UserPathConstants {
 
             if (canSpawnLoot) {
                 stringBuilder.append("<child type=\"")
-                        .append(inGameObject.getObjectClassName()).append(" deloot=\"1\" lootmax=\"1\" lootmin=\"1\"")
+                        .append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1\"")
                         .append("\" x=\"")
                         .append(inGameObject.x)
                         .append("\" z=\"")

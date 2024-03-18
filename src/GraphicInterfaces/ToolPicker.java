@@ -67,7 +67,7 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
 
         eventsButton.addActionListener(actionEvent -> {
             dispose();
-            new FileChooser(INVOCATION_ORIGIN);
+            new FileChooserFrame(INVOCATION_ORIGIN);
         });
 
         protoButton.addActionListener(actionEvent -> {
