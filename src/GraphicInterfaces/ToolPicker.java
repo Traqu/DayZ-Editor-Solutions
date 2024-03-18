@@ -52,7 +52,7 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
 
         JButton eventsButton = new JButton("Event adapter");
         buttonList.add(eventsButton);
-        JButton protoButton = new JButton("Proto extractor");
+        JButton protoButton = new JButton("MapGroupPos filter");
         buttonList.add(protoButton);
 
         for (JButton button : buttonList) {
