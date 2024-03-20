@@ -114,31 +114,35 @@ public class DynamicEventAdapter implements UserPathConstants {
                 inGameObject.y = Math.round(inGameObject.y * 100.0) / 100.0;
                 inGameObject.z = -(z - inGameObject.z);
                 inGameObject.z = Math.round(inGameObject.z * 100.0) / 100.0;
+
+                if(inGameObject.a<0){
+                    inGameObject.a += 360;
+                }
             }
 
             if (canSpawnLoot) {
                 stringBuilder.append("<child type=\"")
-                        .append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1")
+                        .append(inGameObject.getObjectClassName()).append("\" spawnsecondary=\"false\" deloot=\"1\" lootmax=\"1\" lootmin=\"1")
                         .append("\" x=\"")
                         .append(inGameObject.x)
                         .append("\" z=\"")
                         .append(inGameObject.z)
                         .append("\" a=\"")
                         .append(inGameObject.a)
-                        .append("\" y=\"")
-                        .append(inGameObject.y)
+//                        .append("\" y=\"")
+//                        .append(inGameObject.y)
                         .append("\"/>\n");
             } else {
                 stringBuilder.append("<child type=\"")
                         .append(inGameObject.getObjectClassName())
-                        .append("\" x=\"")
+                        .append("\" spawncesondary=\"false\" x=\"")
                         .append(inGameObject.x)
                         .append("\" z=\"")
                         .append(inGameObject.z)
                         .append("\" a=\"")
                         .append(inGameObject.a)
-                        .append("\" y=\"")
-                        .append(inGameObject.y)
+//                        .append("\" y=\"")
+//                        .append(inGameObject.y)
                         .append("\"/>\n");
             }
         }
