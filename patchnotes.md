@@ -25,4 +25,7 @@
 **Version 2.2.1. - 18.03.24**
 - Changed text on one of the buttons in ToolPicker to more accurately represent actual usage of that tool. 
 
+**Version 2.3.0. - 20.03.24**
+- Now `Event adapter` doesn't export 'y' values.
+
 ****
