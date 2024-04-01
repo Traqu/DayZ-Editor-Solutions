@@ -19,4 +19,9 @@ public class InGameObject {
 
         return className;
     }
+
+    @Override
+    public String toString() {
+        return className;
+    }
 }

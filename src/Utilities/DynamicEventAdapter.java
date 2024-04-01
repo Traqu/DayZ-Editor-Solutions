@@ -115,39 +115,65 @@ public class DynamicEventAdapter implements UserPathConstants {
                 inGameObject.z = -(z - inGameObject.z);
                 inGameObject.z = Math.round(inGameObject.z * 100.0) / 100.0;
 
-                if(inGameObject.a<0){
+                if (inGameObject.a < 0) {
                     inGameObject.a += 360;
                 }
             }
-
-            if (canSpawnLoot) {
-                stringBuilder.append("<child type=\"")
-                        .append(inGameObject.getObjectClassName()).append("\" spawnsecondary=\"false\" deloot=\"1\" lootmax=\"1\" lootmin=\"1")
-                        .append("\" x=\"")
-                        .append(inGameObject.x)
-                        .append("\" z=\"")
-                        .append(inGameObject.z)
-                        .append("\" a=\"")
-                        .append(inGameObject.a)
-//                        .append("\" y=\"")
-//                        .append(inGameObject.y)
-                        .append("\"/>\n");
-            } else {
-                stringBuilder.append("<child type=\"")
-                        .append(inGameObject.getObjectClassName())
-                        .append("\" spawncesondary=\"false\" x=\"")
-                        .append(inGameObject.x)
-                        .append("\" z=\"")
-                        .append(inGameObject.z)
-                        .append("\" a=\"")
-                        .append(inGameObject.a)
-//                        .append("\" y=\"")
-//                        .append(inGameObject.y)
-                        .append("\"/>\n");
-            }
+            prepareEvnetFile(inGameObject, inGameObjectsList, canSpawnLoot, stringBuilder);
         }
-
         return stringBuilder;
+    }
+
+    private static void prepareEvnetFile(InGameObject inGameObject, List<InGameObject> inGameObjectsList, boolean canSpawnLoot, StringBuilder stringBuilder) {
+        if (inGameObjectsList.get(0).equals(inGameObject) && canSpawnLoot) {
+            stringBuilder.append("<child type=\"")
+                    .append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1")
+                    .append("\" x=\"")
+                    .append(inGameObject.x)
+                    .append("\" z=\"")
+                    .append(inGameObject.z)
+                    .append("\" a=\"")
+                    .append(inGameObject.a)
+                    .append("\" y=\"")
+                    .append(inGameObject.y)
+                    .append("\"/>\n");
+        } else if (inGameObjectsList.get(0).equals(inGameObject)) {
+            stringBuilder.append("<child type=\"")
+                    .append(inGameObject.getObjectClassName())
+                    .append("\" x=\"")
+                    .append(inGameObject.x)
+                    .append("\" z=\"")
+                    .append(inGameObject.z)
+                    .append("\" a=\"")
+                    .append(inGameObject.a)
+                    .append("\" y=\"")
+                    .append(inGameObject.y)
+                    .append("\"/>\n");
+        } else if (canSpawnLoot) {
+            stringBuilder.append("<child type=\"")
+                    .append(inGameObject.getObjectClassName()).append("\" spawnsecondary=\"false\" deloot=\"1\" lootmax=\"1\" lootmin=\"1")
+                    .append("\" x=\"")
+                    .append(inGameObject.x)
+                    .append("\" z=\"")
+                    .append(inGameObject.z)
+                    .append("\" a=\"")
+                    .append(inGameObject.a)
+                    .append("\" y=\"")
+                    .append(inGameObject.y)
+                    .append("\"/>\n");
+        } else {
+            stringBuilder.append("<child type=\"")
+                    .append(inGameObject.getObjectClassName())
+                    .append("\" spawnsecondary=\"false\" x=\"")
+                    .append(inGameObject.x)
+                    .append("\" z=\"")
+                    .append(inGameObject.z)
+                    .append("\" a=\"")
+                    .append(inGameObject.a)
+                    .append("\" y=\"")
+                    .append(inGameObject.y)
+                    .append("\"/>\n");
+        }
     }
 
     private static List<String> readProtoClassNames() {   //TODO
@@ -167,7 +193,7 @@ public class DynamicEventAdapter implements UserPathConstants {
         return spawnCapableClassesList;
     }
 
-    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList,  File customFile) {
+    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, File customFile) {
         BufferedReader customFilesReader = null;
         try {
             customFilesReader = new BufferedReader(new FileReader(customFile));
@@ -187,19 +213,19 @@ public class DynamicEventAdapter implements UserPathConstants {
 
     private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, String map) {
         try (InputStream inputStream = DynamicEventAdapter.class.getResourceAsStream("/protoFiles/" + map)) {
-                if (inputStream != null) {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        spawnCapableClassesList.add(line);
-                    }
-                } else {
-                    throw new RuntimeException("Nie można odczytać zasobów protoFiles.");
+            if (inputStream != null) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    spawnCapableClassesList.add(line);
                 }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            } else {
+                throw new RuntimeException("Nie można odczytać zasobów protoFiles.");
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
 
     private static Document getDocument(String path) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
