@@ -28,4 +28,6 @@
 **Version 2.3.0. - 20.03.24**
 - Now `Event adapter` doesn't export 'y' values.
 
+**Version 2.3.1. - 02.04.24**
+- Fixed a typo for objects that do not spawn loot.
 ****
