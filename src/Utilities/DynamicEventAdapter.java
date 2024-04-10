@@ -66,7 +66,7 @@ public class DynamicEventAdapter implements UserPathConstants {
     private static StringBuilder parseFile(NodeList itemList) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        double x = 0, y = 0, z = 0;
+        float x = 0, y = 0, z = 0;
         int entry = 0;
 
         List<InGameObject> inGameObjectsList = new ArrayList<>();
@@ -74,6 +74,7 @@ public class DynamicEventAdapter implements UserPathConstants {
         for (int i = 0; i < itemList.getLength(); i++) {
             Element element = (Element) itemList.item(i);
             NodeList events = element.getElementsByTagName("event");
+            System.out.println(events.item(0));
 
             for (int j = 0; j < events.getLength(); j++) {
                 Element event = (Element) events.item(j);
@@ -109,11 +110,11 @@ public class DynamicEventAdapter implements UserPathConstants {
                 inGameObject.y = 0;
             } else {
                 inGameObject.x = -(x - inGameObject.x);
-                inGameObject.x = Math.round(inGameObject.x * 100.0) / 100.0;
+                inGameObject.x = (float) (Math.round(inGameObject.x * 100.0) / 100.0);
                 inGameObject.y = -(y - inGameObject.y);
-                inGameObject.y = Math.round(inGameObject.y * 100.0) / 100.0;
+                inGameObject.y = (float) (Math.round(inGameObject.y * 100.0) / 100.0);
                 inGameObject.z = -(z - inGameObject.z);
-                inGameObject.z = Math.round(inGameObject.z * 100.0) / 100.0;
+                inGameObject.z = (float) (Math.round(inGameObject.z * 100.0) / 100.0);
 
                 if (inGameObject.a < 0) {
                     inGameObject.a += 360;
@@ -231,7 +232,6 @@ public class DynamicEventAdapter implements UserPathConstants {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        Document document = builder.parse(new File(path));
-        return document;
+        return builder.parse(new File(path));
     }
 }

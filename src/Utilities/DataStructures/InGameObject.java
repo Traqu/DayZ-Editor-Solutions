@@ -2,17 +2,17 @@ package Utilities.DataStructures;
 
 public class InGameObject {
     private String className;
-    public double x;
-    public double y;
-    public double a;
-    public double z;
+    public float x;
+    public float y;
+    public float a;
+    public float z;
 
     public InGameObject(String className, String x, String y, String a, String z) {
         this.className = className;
-        this.x = Double.parseDouble(x);
-        this.y = Double.parseDouble(y);
-        this.a = Double.parseDouble(a);
-        this.z = Double.parseDouble(z);
+        this.x = Float.parseFloat(x);
+        this.y = Float.parseFloat(y);
+        this.a = Float.parseFloat(a);
+        this.z = Float.parseFloat(z);
     }
 
     public String getObjectClassName() {

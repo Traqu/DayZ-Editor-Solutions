@@ -30,4 +30,7 @@
 
 **Version 2.3.1. - 02.04.24**
 - Fixed a typo for objects that do not spawn loot.
+
+**Version 2.4.0. - 02.04.24**
+- Added welcome window.
 ****
