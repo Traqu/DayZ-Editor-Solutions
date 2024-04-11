@@ -33,4 +33,7 @@
 
 **Version 2.4.0. - 02.04.24**
 - Added welcome window.
+
+**Version 2.5.0. - 11.04.24**
+- Added Takistan & Namalsk mapgroupproto class names to default filtering list.
 ****
