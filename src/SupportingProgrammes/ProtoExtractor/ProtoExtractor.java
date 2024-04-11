@@ -5,8 +5,8 @@ import java.io.*;
 public class ProtoExtractor {
 
     public static void main(String[] args) {
-        final String SOURCE_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Purifier\\resources\\protoFiles\\rawProtoFiles";
-        final String DESTINATION_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Purifier\\resources\\protoFiles";
+        final String SOURCE_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Code_PostCleaner\\resources\\rawProtoFiles";
+        final String DESTINATION_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Code_PostCleaner\\resources\\protoFiles";
 
         try {
             File sourceDir = new File(SOURCE_FOLDER);

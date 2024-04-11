@@ -51,11 +51,13 @@ public class FileChooserFrame extends JFrame implements UserInterfaceConstants, 
 
     private void setTitleOnInvocation(CallOrigin invocationOrigin) {
         switch (invocationOrigin) {
-            case TOOL_PICKER ->
-                    setTitle(" Choose file from which you want to extract objects" + PropertiesReader.getVersion(true));
-            case OTHER ->
-                    setTitle(" Choose file from which you want to extract spawns" + PropertiesReader.getVersion(true));
+            case TOOL_PICKER:
+                setTitle(" Choose file from which you want to extract objects" + PropertiesReader.getVersion(true));
+                break;
+            case OTHER:
+                setTitle(" Choose file from which you want to extract spawns" + PropertiesReader.getVersion(true));
+                break;
         }
-
     }
+
 }
