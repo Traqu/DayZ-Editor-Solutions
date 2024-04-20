@@ -95,8 +95,8 @@ public class DynamicEventAdapter implements UserPathConstants {
         for (InGameObject inGameObject : inGameObjectsList) {
             boolean canSpawnLoot = false;
 
-            for (String spawnCabableObject : spawnCabableObjectsList) {
-                if (inGameObject.getObjectClassName().equals(spawnCabableObject)) {
+            for (String spawnCapableObject : spawnCabableObjectsList) {
+                if (inGameObject.getObjectClassName().equals(spawnCapableObject)) {
                     canSpawnLoot = true;
                 }
             }
@@ -120,12 +120,12 @@ public class DynamicEventAdapter implements UserPathConstants {
                     inGameObject.a += 360;
                 }
             }
-            prepareEvnetFile(inGameObject, inGameObjectsList, canSpawnLoot, stringBuilder);
+            prepareEventFile(inGameObject, inGameObjectsList, canSpawnLoot, stringBuilder);
         }
         return stringBuilder;
     }
 
-    private static void prepareEvnetFile(InGameObject inGameObject, List<InGameObject> inGameObjectsList, boolean canSpawnLoot, StringBuilder stringBuilder) {
+    private static void prepareEventFile(InGameObject inGameObject, List<InGameObject> inGameObjectsList, boolean canSpawnLoot, StringBuilder stringBuilder) {
         if (inGameObjectsList.get(0).equals(inGameObject) && canSpawnLoot) {
             stringBuilder.append("<child type=\"")
                     .append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1")
