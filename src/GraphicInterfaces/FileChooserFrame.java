@@ -12,11 +12,9 @@ import java.util.Objects;
 
 
 public class FileChooserFrame extends JFrame implements UserInterfaceConstants, UserPathConstants {
-    private CallOrigin invocationOrigin;
     public static final JPanel PANEL = new JPanel();
 
     public FileChooserFrame(CallOrigin invocationOrigin) {
-        this.invocationOrigin = invocationOrigin;
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
@@ -45,8 +43,6 @@ public class FileChooserFrame extends JFrame implements UserInterfaceConstants, 
         fileChooser.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
 
         PANEL.add(fileChooser);
-
-
     }
 
     private void setTitleOnInvocation(CallOrigin invocationOrigin) {

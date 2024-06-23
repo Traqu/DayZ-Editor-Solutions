@@ -19,7 +19,6 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
     public ToolPicker(String title) throws HeadlessException {
         super(title);
         setupFrame();
-
     }
 
     private void setupFrame() {

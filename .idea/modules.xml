@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DayZ Editor - Code Post Cleaner.iml" filepath="$PROJECT_DIR$/DayZ Editor - Code Post Cleaner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DayZ Utilities.iml" filepath="$PROJECT_DIR$/DayZ Utilities.iml" />
     </modules>
   </component>
 </project>
