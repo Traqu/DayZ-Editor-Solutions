@@ -136,9 +136,9 @@ public class DynamicEventAdapter implements UserPathConstants {
 
 
     private static void prepareEventFile(InGameObject inGameObject, List<InGameObject> inGameObjectsList, boolean canSpawnLoot, StringBuilder stringBuilder) {
-        if (inGameObjectsList.getFirst().equals(inGameObject) && canSpawnLoot) {
+        if (inGameObjectsList.get(0).equals(inGameObject) && canSpawnLoot) {
             stringBuilder.append("<child type=\"").append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1").append("\" x=\"").append(inGameObject.x).append("\" z=\"").append(inGameObject.z).append("\" a=\"").append(inGameObject.a).append("\" y=\"").append(inGameObject.y).append("\"/>\n");
-        } else if (inGameObjectsList.getFirst().equals(inGameObject)) {
+        } else if (inGameObjectsList.get(0).equals(inGameObject)) {
             stringBuilder.append("<child type=\"").append(inGameObject.getObjectClassName()).append("\" x=\"").append(inGameObject.x).append("\" z=\"").append(inGameObject.z).append("\" a=\"").append(inGameObject.a).append("\" y=\"").append(inGameObject.y).append("\"/>\n");
         } else if (canSpawnLoot) {
             stringBuilder.append("<child type=\"").append(inGameObject.getObjectClassName()).append("\" spawnsecondary=\"false\" deloot=\"1\" lootmax=\"1\" lootmin=\"1").append("\" x=\"").append(inGameObject.x).append("\" z=\"").append(inGameObject.z).append("\" a=\"").append(inGameObject.a).append("\" y=\"").append(inGameObject.y).append("\"/>\n");
