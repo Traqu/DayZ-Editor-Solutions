@@ -6,5 +6,9 @@ public interface UserPathConstants {
             CUSTOM_RESOURCES_SUB_PATH = "\\AppData\\Local\\DayZ EditorPurifier\\custom",
             CUSTOM_RESOURCES_PATH = USER_HOME + CUSTOM_RESOURCES_SUB_PATH,
             LIVONIA = "livonia",
-            CHERNARUS = "chernarus";
+            CHERNARUS = "chernarus",
+            SAKHALA = "sakhal",
+            DEERISLE = "deerisle",
+            TAKISTAN = "takistan",
+            NAMALSK = "namalsk";
 }

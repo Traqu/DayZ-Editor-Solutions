@@ -13,15 +13,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicEventAdapter implements UserPathConstants {
 
     public DynamicEventAdapter(String filePath, FileChooserFrame fileChooserFrame) throws ParserConfigurationException, IOException, SAXException {
-
         String output = filePath;
-
 
         Document dynamicEventDocument = getDocument(filePath);
 
@@ -37,7 +37,6 @@ public class DynamicEventAdapter implements UserPathConstants {
             }
             throw new RuntimeException("Selected file doesn't follow a dynamic event structure that DayZ Editor exports.");
         }
-
 
         StringBuilder stringBuilder = parseFile(itemList);
         writeToFile(output, stringBuilder);
@@ -61,7 +60,6 @@ public class DynamicEventAdapter implements UserPathConstants {
             e.printStackTrace();
         }
     }
-
 
     private static StringBuilder parseFile(NodeList itemList) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -134,7 +132,6 @@ public class DynamicEventAdapter implements UserPathConstants {
         return stringBuilder;
     }
 
-
     private static void prepareEventFile(InGameObject inGameObject, List<InGameObject> inGameObjectsList, boolean canSpawnLoot, StringBuilder stringBuilder) {
         if (inGameObjectsList.get(0).equals(inGameObject) && canSpawnLoot) {
             stringBuilder.append("<child type=\"").append(inGameObject.getObjectClassName()).append("\" deloot=\"1\" lootmax=\"1\" lootmin=\"1").append("\" x=\"").append(inGameObject.x).append("\" z=\"").append(inGameObject.z).append("\" a=\"").append(inGameObject.a).append("\" y=\"").append(inGameObject.y).append("\"/>\n");
@@ -147,13 +144,12 @@ public class DynamicEventAdapter implements UserPathConstants {
         }
     }
 
-    private static List<String> readProtoClassNames() {   //TODO
+    private static List<String> readProtoClassNames() {
         List<String> spawnCapableClassesList = new ArrayList<>();
         File file = new File(CUSTOM_RESOURCES_PATH);
         File[] customFiles = file.listFiles();
 
-        readSpawnsCapableClassesFromMission(spawnCapableClassesList, LIVONIA);
-        readSpawnsCapableClassesFromMission(spawnCapableClassesList, CHERNARUS);
+        readAllProtoFiles(spawnCapableClassesList);
         if (customFiles != null) {
             for (File customFile : customFiles) {
                 System.out.println("Processing custom files: " + customFile);
@@ -165,25 +161,18 @@ public class DynamicEventAdapter implements UserPathConstants {
     }
 
     private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, File customFile) {
-        BufferedReader customFilesReader = null;
-        try {
-            customFilesReader = new BufferedReader(new FileReader(customFile));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        String line;
-        while (true) {
-            try {
-                if ((line = customFilesReader.readLine()) == null) break;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        try (BufferedReader customFilesReader = new BufferedReader(new FileReader(customFile))) {
+            String line;
+            while ((line = customFilesReader.readLine()) != null) {
+                spawnCapableClassesList.add(line);
             }
-            spawnCapableClassesList.add(line);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, String map) {
-        try (InputStream inputStream = DynamicEventAdapter.class.getResourceAsStream("/protoFiles/" + map)) {
+    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, String fileName) {
+        try (InputStream inputStream = DynamicEventAdapter.class.getResourceAsStream("/protoFiles/" + fileName)) {
             if (inputStream != null) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
@@ -195,6 +184,21 @@ public class DynamicEventAdapter implements UserPathConstants {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void readAllProtoFiles(List<String> spawnCapableClassesList) {
+        try {
+            Path protoFilesDir = Paths.get(DynamicEventAdapter.class.getResource("/protoFiles").toURI());
+            DirectoryStream<Path> stream = Files.newDirectoryStream(protoFilesDir);
+
+            for (Path path : stream) {
+                if (!Files.isDirectory(path)) {
+                    readSpawnsCapableClassesFromMission(spawnCapableClassesList, path.getFileName().toString());
+                }
+            }
+        } catch (URISyntaxException | IOException e) {
+            throw new RuntimeException("Błąd podczas odczytu plików z katalogu protoFiles", e);
         }
     }
 

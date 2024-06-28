@@ -40,4 +40,9 @@
 **Version 3.0.0. - 23.06.24**
 - Now if you are using `@More Dynamic Events Objects` mod, you will not have to worry about manually replacing first object in your group to be on top of the file, assuming that you have used the special object `Traqu__[...]` (double underscore! it should be on the top of modded items list).
 - Available files are now displayed vertically.
+
+**Version 3.1.0. - 28.06.24**
+- Added JHNY complexity fix
+- Now protoFiles are properly handled
+
 ****
