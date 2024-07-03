@@ -45,4 +45,7 @@
 - Added JHNY complexity fix
 - Now protoFiles are properly handled
 
+**Version 3.1.1. - 03.07.24**
+- Fixed reading map data from resource files
+- 
 ****
