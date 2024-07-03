@@ -1,5 +1,6 @@
 package Utilities;
 
+import GraphicInterfaces.Constants.Interfaces.MapsConstants;
 import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
 import GraphicInterfaces.FileChooserFrame;
 import Utilities.DataStructures.InGameObject;
@@ -13,14 +14,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
-import java.nio.file.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DynamicEventAdapter implements UserPathConstants {
+public class DynamicEventAdapter implements UserPathConstants, MapsConstants {
 
     public DynamicEventAdapter(String filePath, FileChooserFrame fileChooserFrame) throws ParserConfigurationException, IOException, SAXException {
+
         String output = filePath;
 
         Document dynamicEventDocument = getDocument(filePath);
@@ -82,7 +83,6 @@ public class DynamicEventAdapter implements UserPathConstants {
                     Element pos = (Element) positions.item(k);
                     InGameObject inGameObject = new InGameObject(inGameObjectName, pos.getAttribute("x"), pos.getAttribute("y"), pos.getAttribute("a"), pos.getAttribute("z"));
 
-                    /** double underscore "__" is being used, because the class name might eventually change, but in the mod itself it will always have that double underscore to make it alphabetically first in order.*/
                     if (inGameObjectName.contains("__")) {
                         referenceObject = inGameObject;
                     }
@@ -97,16 +97,10 @@ public class DynamicEventAdapter implements UserPathConstants {
             inGameObjectsList.add(0, referenceObject);
         }
 
-        List<String> spawnCabableObjectsList = readProtoClassNames();
+        List<String> spawnCapableObjectsList = readProtoClassNames();
 
         for (InGameObject inGameObject : inGameObjectsList) {
-            boolean canSpawnLoot = false;
-
-            for (String spawnCapableObject : spawnCabableObjectsList) {
-                if (inGameObject.getObjectClassName().equals(spawnCapableObject)) {
-                    canSpawnLoot = true;
-                }
-            }
+            boolean canSpawnLoot = spawnCapableObjectsList.contains(inGameObject.getObjectClassName());
 
             if (entry++ == 0) {
                 x = inGameObject.x;
@@ -149,7 +143,8 @@ public class DynamicEventAdapter implements UserPathConstants {
         File file = new File(CUSTOM_RESOURCES_PATH);
         File[] customFiles = file.listFiles();
 
-        readAllProtoFiles(spawnCapableClassesList);
+        readLinesFromAllResourceFiles(spawnCapableClassesList);
+
         if (customFiles != null) {
             for (File customFile : customFiles) {
                 System.out.println("Processing custom files: " + customFile);
@@ -158,6 +153,28 @@ public class DynamicEventAdapter implements UserPathConstants {
         }
 
         return spawnCapableClassesList;
+    }
+
+    private static void readLinesFromAllResourceFiles(List<String> spawnCapableClassesList) {
+        Field[] fields = MapsConstants.class.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.getType() == String.class) {
+                try {
+                    String mapName = (String) field.get(null);
+                    if (resourceFileExists(mapName)) {
+                        readSpawnsCapableClassesFromMission(spawnCapableClassesList, mapName);
+                    } else {
+                        System.out.println("Warning: Resource file for map " + mapName + " not found.");
+                    }
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    private static boolean resourceFileExists(String map) {
+        return DynamicEventAdapter.class.getResource("/protoFiles/" + map) != null;
     }
 
     private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, File customFile) {
@@ -171,8 +188,8 @@ public class DynamicEventAdapter implements UserPathConstants {
         }
     }
 
-    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, String fileName) {
-        try (InputStream inputStream = DynamicEventAdapter.class.getResourceAsStream("/protoFiles/" + fileName)) {
+    private static void readSpawnsCapableClassesFromMission(List<String> spawnCapableClassesList, String map) {
+        try (InputStream inputStream = DynamicEventAdapter.class.getResourceAsStream("/protoFiles/" + map)) {
             if (inputStream != null) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
@@ -180,32 +197,16 @@ public class DynamicEventAdapter implements UserPathConstants {
                     spawnCapableClassesList.add(line);
                 }
             } else {
-                throw new RuntimeException("Nie można odczytać zasobów protoFiles.");
+                throw new RuntimeException("Nie można odczytać zasobów protoFiles: " + map);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static void readAllProtoFiles(List<String> spawnCapableClassesList) {
-        try {
-            Path protoFilesDir = Paths.get(DynamicEventAdapter.class.getResource("/protoFiles").toURI());
-            DirectoryStream<Path> stream = Files.newDirectoryStream(protoFilesDir);
-
-            for (Path path : stream) {
-                if (!Files.isDirectory(path)) {
-                    readSpawnsCapableClassesFromMission(spawnCapableClassesList, path.getFileName().toString());
-                }
-            }
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException("Błąd podczas odczytu plików z katalogu protoFiles", e);
-        }
-    }
-
     private static Document getDocument(String path) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-
         return builder.parse(new File(path));
     }
 }

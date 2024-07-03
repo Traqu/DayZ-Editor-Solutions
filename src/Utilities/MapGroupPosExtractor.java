@@ -1,18 +1,16 @@
 package Utilities;
 
+import GraphicInterfaces.Constants.Interfaces.MapsConstants;
 import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
 
 import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
+import java.lang.reflect.Field;
 import java.nio.file.*;
 import java.util.*;
 import java.util.List;
 
-
-
-public class MapGroupPosExtractor implements UserPathConstants {
-
+public class MapGroupPosExtractor implements UserPathConstants, MapsConstants {
 
     private final List<String> HAS_LOOTSPAWNS_LIST = new ArrayList<>();
     private final Set<String> HAS_LOOTSPAWNS_SET = new HashSet<>();
@@ -21,38 +19,30 @@ public class MapGroupPosExtractor implements UserPathConstants {
         System.out.println("Extracting from: " + filePath);
         List<String> placedObjects;
 
-
         File file = new File(CUSTOM_RESOURCES_PATH);
         File[] customFiles = file.listFiles();
 
-        readAllProtoFiles();
+        // Automatically read lines from all resource files defined in MapsConstants
+        readLinesFromAllResourceFiles();
 
         if (customFiles != null) {
             for (File customFile : customFiles) {
-                BufferedReader customFilesReader = new BufferedReader(new FileReader(customFile.getPath()));
-                String line;
-                while (true) {
-                    try {
-                        line = customFilesReader.readLine();
-                        if (line == null || line.isBlank()) break;
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                try (BufferedReader customFilesReader = new BufferedReader(new FileReader(customFile.getPath()))) {
+                    String line;
+                    while ((line = customFilesReader.readLine()) != null) {
+                        HAS_LOOTSPAWNS_SET.add(line);
                     }
-                    HAS_LOOTSPAWNS_SET.add(line);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
+
         try {
             placedObjects = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        //        placedObjects.forEach(object -> HAS_LOOTSPAWNS_SET.forEach(protoObject -> {
-//            if (object.contains(protoObject)) {
-//                HAS_LOOTSPAWNS_LIST.add(object);
-//            }
-//        }));
 
         placedObjects.stream()
                 .filter(object -> {
@@ -61,15 +51,8 @@ public class MapGroupPosExtractor implements UserPathConstants {
                 })
                 .forEach(HAS_LOOTSPAWNS_LIST::add);
 
-
-
         sourceFile = sourceFile.substring(0, sourceFile.length() - 4);
         String output = DAYZ_EDITOR_PATH + File.separator + sourceFile + ".txt";
-
-
-        //Adding distinct, because for whatever reason I had ONLY_ONE occurrence of doubled item,
-        //even though it wasn't duplicated in The Editor nor anywhere else
-        //this seems to have fixed it though...
 
         List<String> lootspawns = new ArrayList<>(HAS_LOOTSPAWNS_LIST.stream().distinct().toList());
 
@@ -99,6 +82,28 @@ public class MapGroupPosExtractor implements UserPathConstants {
         System.exit(0);
     }
 
+    private void readLinesFromAllResourceFiles() {
+        Field[] fields = MapsConstants.class.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.getType() == String.class) {
+                try {
+                    String mapName = (String) field.get(null);
+                    if (resourceFileExists(mapName)) {
+                        readLinesFromResourceFile(mapName);
+                    } else {
+                        System.out.println("Warning: Resource file for map " + mapName + " not found.");
+                    }
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    private boolean resourceFileExists(String map) {
+        return getClass().getResource("/protoFiles/" + map) != null;
+    }
+
     private void readLinesFromResourceFile(String map) {
         try (InputStream inputStream = getClass().getResourceAsStream("/protoFiles/" + map)) {
             if (inputStream != null) {
@@ -108,26 +113,10 @@ public class MapGroupPosExtractor implements UserPathConstants {
                     HAS_LOOTSPAWNS_SET.add(line);
                 }
             } else {
-                System.err.println("Nie można odczytać zasobów protoFiles dla mapy: " + map);
+                throw new RuntimeException("Nie można odczytać zasobów protoFiles: " + map);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    private void readAllProtoFiles() {
-        try {
-            Path protoFilesDir = Paths.get(getClass().getResource("/protoFiles").toURI());
-            DirectoryStream<Path> stream = Files.newDirectoryStream(protoFilesDir);
-
-            for (Path path : stream) {
-                if (!Files.isDirectory(path)) {
-                    readLinesFromResourceFile(path.getFileName().toString());
-                }
-            }
-        } catch (URISyntaxException | IOException e) {
-            throw new RuntimeException("Błąd podczas odczytu plików z katalogu protoFiles", e);
-        }
-    }
-
 }
