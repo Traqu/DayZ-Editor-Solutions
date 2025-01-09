@@ -32,7 +32,7 @@ public class DynamicEventAdapter implements UserPathConstants, MapsConstants {
             fileChooserFrame.setTitle("This is not an event file!");
             try {
                 Thread.sleep(1250);
-                fileChooserFrame.setTitle(" Choose file from which you want to extract objects" + PropertiesReader.getVersion(true));
+                fileChooserFrame.setTitle(" Choose file from which you want to extract objects" + PropertiesReader.getVersion(true) + " " + PropertiesReader.getAuthor());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

@@ -25,9 +25,8 @@ public class PropertiesReader {
         String result;
         try {
             property.load(PropertiesReader.class.getClassLoader().getResourceAsStream(".properties"));
-            String prefix = "    (Version ";
-            String suffix = ")";
-            result = prefix + property.getProperty("version") + suffix;
+            String prefix = "  -  version ";
+            result = prefix + property.getProperty("version");
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -40,6 +39,17 @@ public class PropertiesReader {
         try {
             property.load(PropertiesReader.class.getClassLoader().getResourceAsStream(".properties"));
             return property.getProperty("version");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getAuthor() {
+        try {
+            property.load(PropertiesReader.class.getClassLoader().getResourceAsStream(".properties"));
+            return property.getProperty("author");
 
         } catch (IOException ex) {
             ex.printStackTrace();

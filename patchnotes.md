@@ -47,5 +47,9 @@
 
 **Version 3.1.1. - 03.07.24**
 - Fixed reading map data from resource files
-- 
+
+**Version 3.1.2. - 09.01.25**
+- Reworked how properties are read to the title bar
+- Added Sakhal proto
+- The Welcoming window displays for 2 instead of 3 seconds now
 ****

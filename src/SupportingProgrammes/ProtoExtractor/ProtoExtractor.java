@@ -5,8 +5,8 @@ import java.io.*;
 public class ProtoExtractor {
 
     public static void main(String[] args) {
-        final String SOURCE_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Code_PostCleaner\\resources\\rawProtoFiles";
-        final String DESTINATION_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ-Editor-Code_PostCleaner\\resources\\protoFiles";
+        final String SOURCE_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ Utilities\\resources\\rawProtoFiles";
+        final String DESTINATION_FOLDER = "C:\\Users\\piotr\\IdeaProjects\\DayZ Utilities\\resources\\protoFiles";
 
         try {
             File sourceDir = new File(SOURCE_FOLDER);
@@ -71,11 +71,11 @@ public class ProtoExtractor {
     }
 
     private static String getMapNameFromFileName(String fileName) {
-        int startIndex = fileName.indexOf("_-_") + 3;
+//        int startIndex = fileName.indexOf("_-_") + 3;
         int endIndex = fileName.lastIndexOf(".xml");
 
         if (endIndex != -1) {
-            return fileName.substring(startIndex, endIndex);
+            return fileName.substring(0, endIndex);
         }
 
         return fileName;
