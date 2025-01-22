@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="DayZ Editor Purifier:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/DayZ_Editor_Purifier_jar</output-path>
+  <artifact type="jar" name="DayZ Utilities:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DayZ_Utilities_jar</output-path>
     <root id="archive" name="DayZ_Editor_Purifier.jar">
       <element id="module-output" name="DayZ Utilities" />
     </root>

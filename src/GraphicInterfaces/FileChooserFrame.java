@@ -32,7 +32,7 @@ public class FileChooserFrame extends JFrame implements UserInterfaceConstants, 
         setAlwaysOnTop(true);
         setPreferredSize(DEFAULT_WINDOW_DIMENSION);
         pack();
-        setLocation((DESKTOP_WIDTH / 2) - (getWidth() / 2), DESKTOP_HEIGTH / 2 - (getHeight() / 2));
+        setLocation((DESKTOP_WIDTH / 2) - (getWidth() / 2), DESKTOP_HEIGHT / 2 - (getHeight() / 2));
         add(PANEL);
 
         FileChooser

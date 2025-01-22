@@ -13,7 +13,7 @@ import static GraphicInterfaces.Constants.Enums.CallOrigin.TOOL_PICKER;
 
 public class ToolPicker extends JFrame implements UserInterfaceConstants {
 
-    private static final Dimension UNIFIED_BTN_DIM = new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH);
+    private static final Dimension UNIFIED_BTN_DIM = new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGHT);
     private final CallOrigin INVOCATION_ORIGIN = TOOL_PICKER;
 
     public ToolPicker(String title) throws HeadlessException {
@@ -37,7 +37,7 @@ public class ToolPicker extends JFrame implements UserInterfaceConstants {
         pack();
 
         /**Sets the window's location to be centered on user's screen*/
-        setLocation((DESKTOP_WIDTH / 2) - (this.getWidth() / 2), DESKTOP_HEIGTH / 2 - (this.getHeight() / 2));
+        setLocation((DESKTOP_WIDTH / 2) - (this.getWidth() / 2), DESKTOP_HEIGHT / 2 - (this.getHeight() / 2));
         setResizable(false);
         setVisible(true);
     }

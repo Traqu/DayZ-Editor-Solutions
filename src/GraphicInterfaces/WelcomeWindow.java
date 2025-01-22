@@ -14,7 +14,7 @@ public class WelcomeWindow extends JWindow implements UserInterfaceConstants {
         if (graphicURL != null) {
             welcomeGraphic = new JLabel(new ImageIcon(graphicURL));
             add(welcomeGraphic);
-            setLocation(DESKTOP_WIDTH / 2 - welcomeGraphic.getPreferredSize().width / 2, DESKTOP_HEIGTH / 2 - (welcomeGraphic.getPreferredSize().height / 2));
+            setLocation(DESKTOP_WIDTH / 2 - welcomeGraphic.getPreferredSize().width / 2, DESKTOP_HEIGHT / 2 - (welcomeGraphic.getPreferredSize().height / 2));
 
             pack();
             setVisible(true);

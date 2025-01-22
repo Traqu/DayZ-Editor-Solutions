@@ -65,8 +65,8 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
         anchorPanel.add(buttonPanel);
 
         Dimension optionalButtonsSize = new Dimension(140, 50);
-        addButton.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
-        skipButton.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGTH));
+        addButton.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGHT));
+        skipButton.setPreferredSize(new Dimension(UNIFIED_BUTTON_WIDTH, UNIFIED_BUTTON_HEIGHT));
 
         buttonPanel.add(addButton);
 
@@ -111,14 +111,14 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                 buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * UNIFIED_BUTTON_WIDTH - 2 * 28));
             }
         } else {
-            buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * UNIFIED_BUTTON_HEIGTH - 2 * 28));
+            buttonPanel.add(Box.createHorizontalStrut(frame.getWidth() - 2 * UNIFIED_BUTTON_WIDTH - 2 * 28));
         }
+
         buttonPanel.add(skipButton);
         addButton.setFocusable(false);
         skipButton.setFocusable(false);
         skipButton.setFont(FONT_BAGHDAD);
         addButton.setFont(FONT_BAGHDAD);
-
 
         addButton.addActionListener(e -> {
             frame.dispose();
@@ -128,6 +128,7 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
                      UnsupportedLookAndFeelException exception) {
                 throw new RuntimeException(exception);
             }
+
             JFrame fileChooserFrame = new JFrame();
             FileChooser fileChooser = new FileChooser(System.getProperty("user.home") + File.separator + "desktop", fileChooserFrame);
             setupFrame(fileChooserFrame, logo, desktopWidth, desktopHeight, DEFAULT_WINDOW_DIMENSION);
