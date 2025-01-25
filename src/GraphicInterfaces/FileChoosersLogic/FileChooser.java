@@ -2,7 +2,6 @@ package GraphicInterfaces.FileChoosersLogic;
 
 import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -79,7 +78,7 @@ public class FileChooser extends JFileChooser implements UserPathConstants {
 
     private void createProtoExtractor() {
         try {
-            new MapGroupPosExtractor(this.getSelectedFile().getPath(), this.getSelectedFile().getName());
+            new MapGroupPosExtractor(this.getSelectedFile().getPath(), this.getSelectedFile().getName(), invocationFileChooser);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

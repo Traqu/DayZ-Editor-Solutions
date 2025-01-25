@@ -20,7 +20,7 @@ public class WelcomeWindow extends JWindow implements UserInterfaceConstants {
             setVisible(true);
 
             try {
-                Thread.sleep(2000);
+                Thread.sleep(2);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

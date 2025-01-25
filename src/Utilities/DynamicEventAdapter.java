@@ -1,6 +1,7 @@
 package Utilities;
 
 import GraphicInterfaces.Constants.Interfaces.MapsConstants;
+import GraphicInterfaces.Constants.Interfaces.UserInterfaceConstants;
 import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
 import GraphicInterfaces.FileChooserFrame;
 import Utilities.DataStructures.InGameObject;

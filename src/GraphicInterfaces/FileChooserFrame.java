@@ -8,11 +8,13 @@ import Utilities.PropertiesReader;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.util.Objects;
 
 
 public class FileChooserFrame extends JFrame implements UserInterfaceConstants, UserPathConstants {
     public static final JPanel PANEL = new JPanel();
+    private final JCheckBox useCustomFilesCheckbox = new JCheckBox("INCLUDE CUSTOM PROTOFILES IN FILTERING: ", true);
 
     public FileChooserFrame(CallOrigin invocationOrigin) {
         try {
@@ -25,24 +27,28 @@ public class FileChooserFrame extends JFrame implements UserInterfaceConstants, 
         setIconImage(logo.getImage());
         setVisible(true);
 
-        setTitleOnInvocation(invocationOrigin);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
         setPreferredSize(DEFAULT_WINDOW_DIMENSION);
+        setTitleOnInvocation(invocationOrigin);
         pack();
         setLocation((DESKTOP_WIDTH / 2) - (getWidth() / 2), DESKTOP_HEIGHT / 2 - (getHeight() / 2));
         add(PANEL);
 
-        FileChooser
-                fileChooser = new FileChooser(
-                DAYZ_EDITOR_PATH, invocationOrigin, this
-        );
+        FileChooser fileChooser = new FileChooser(DAYZ_EDITOR_PATH, invocationOrigin, this);
 
         fileChooser.setFileFilter(new FileNameExtensionFilter("XML Files", "xml"));
 
         PANEL.add(fileChooser);
+        if (invocationOrigin == CallOrigin.OTHER) {
+            PANEL.setLayout(new FlowLayout(FlowLayout.TRAILING));
+            useCustomFilesCheckbox.setFont(UserInterfaceConstants.FONT_BAGHDAD);
+            useCustomFilesCheckbox.setHorizontalTextPosition(SwingConstants.LEFT);
+            useCustomFilesCheckbox.setFocusable(false);
+            PANEL.add(useCustomFilesCheckbox);
+        }
     }
 
     private void setTitleOnInvocation(CallOrigin invocationOrigin) {
@@ -51,9 +57,13 @@ public class FileChooserFrame extends JFrame implements UserInterfaceConstants, 
                 setTitle(" Event adapter" + PropertiesReader.getVersion(true) + " " + PropertiesReader.getAuthor());
                 break;
             case OTHER:
+                setPreferredSize(new Dimension(UserInterfaceConstants.DEFAULT_WINDOW_DIMENSION.width, UserInterfaceConstants.DEFAULT_WINDOW_DIMENSION.height + 38));
                 setTitle(" MapGroupPos filter" + PropertiesReader.getVersion(true) + " " + PropertiesReader.getAuthor());
                 break;
         }
     }
 
+    public boolean isUseCustomFiles() {
+        return useCustomFilesCheckbox.isSelected();
+    }
 }

@@ -2,6 +2,7 @@ package Utilities;
 
 import GraphicInterfaces.Constants.Interfaces.MapsConstants;
 import GraphicInterfaces.Constants.Interfaces.UserPathConstants;
+import GraphicInterfaces.FileChooserFrame;
 
 import java.awt.*;
 import java.io.*;
@@ -15,7 +16,7 @@ public class MapGroupPosExtractor implements UserPathConstants, MapsConstants {
     private final List<String> HAS_LOOTSPAWNS_LIST = new ArrayList<>();
     private final Set<String> HAS_LOOTSPAWNS_SET = new HashSet<>();
 
-    public MapGroupPosExtractor(String filePath, String sourceFile) throws FileNotFoundException {
+    public MapGroupPosExtractor(String filePath, String sourceFile, FileChooserFrame frame) throws FileNotFoundException {
         System.out.println("Extracting from: " + filePath);
         List<String> placedObjects;
 
@@ -25,7 +26,7 @@ public class MapGroupPosExtractor implements UserPathConstants, MapsConstants {
         // Automatically read lines from all resource files defined in MapsConstants
         readLinesFromAllResourceFiles();
 
-        if (customFiles != null) {
+        if (customFiles != null && frame.isUseCustomFiles()) {
             for (File customFile : customFiles) {
                 try (BufferedReader customFilesReader = new BufferedReader(new FileReader(customFile.getPath()))) {
                     String line;
