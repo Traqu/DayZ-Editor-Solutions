@@ -549,7 +549,3 @@ DEF_Wreck_Uaz_DE
 DEF_Wreck_BRDM_DE
 DEF_Roadblock_Table_DE
 DEF_Roadblock_WoodenCrate_DE
-AP_prop_skeleton_side2_old
-StaticObj_Furniture_metalcrate
-StaticObj_Furniture_metalcrate_02
-StaticObj_ammoboxes_single
