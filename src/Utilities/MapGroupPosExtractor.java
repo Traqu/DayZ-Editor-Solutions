@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.nio.file.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MapGroupPosExtractor implements UserPathConstants, MapsConstants {
 
@@ -40,7 +41,7 @@ public class MapGroupPosExtractor implements UserPathConstants, MapsConstants {
         }
 
         try {
-            placedObjects = Files.readAllLines(Path.of(filePath));
+            placedObjects = Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -55,7 +56,7 @@ public class MapGroupPosExtractor implements UserPathConstants, MapsConstants {
         sourceFile = sourceFile.substring(0, sourceFile.length() - 4);
         String output = DAYZ_EDITOR_PATH + File.separator + sourceFile + ".txt";
 
-        List<String> lootspawns = new ArrayList<>(HAS_LOOTSPAWNS_LIST.stream().distinct().toList());
+        List<String> lootspawns = HAS_LOOTSPAWNS_LIST.stream().distinct().collect(Collectors.toList());
 
         try (PrintWriter writer = new PrintWriter(output)) {
             lootspawns.forEach(writer::println);

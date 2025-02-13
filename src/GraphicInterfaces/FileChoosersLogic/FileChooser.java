@@ -54,10 +54,17 @@ public class FileChooser extends JFileChooser implements UserPathConstants {
     public void approveSelection() {
         if (!isCustomFileChooser) {
             switch (invocationOrigin) {
-                case TOOL_PICKER -> createDynamicEventParser();
-                case OTHER -> createProtoExtractor();
+                case TOOL_PICKER:
+                    createDynamicEventParser();
+                    break;
+                case OTHER:
+                    createProtoExtractor();
+                    break;
+                default:
+                    break;
             }
-        } else {
+        }
+        else {
             try {
                 new CustomClassExtractor(this.getSelectedFile().getPath());
             } catch (IOException e) {

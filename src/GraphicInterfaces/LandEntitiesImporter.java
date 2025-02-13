@@ -42,13 +42,13 @@ public class LandEntitiesImporter implements UserInterfaceConstants {
         setupFrame(frame, logo, desktopWidth, desktopHeight, new Dimension(500, 205));
 
         JButton addButton = new JButton("Add");
-        JTextArea prompt = new JTextArea("""
-                 You can add custom classes file.
-                 Provide file in xml format, containing lines corresponding to the example below:\s
+        JTextArea prompt = new JTextArea(
+                "You can add custom classes file.\n" +
+                        "Provide file in xml format, containing lines corresponding to the example below:\n\n" +
+                        "\t<group name=\"CLASSNAME\"[optional characters]\n\n" +
+                        "All other lines will be ignored. Once added, they will stay, until manually removed."
+        );
 
-                \t<group name="CLASSNAME"[optional characters]
-
-                 All other lines will be ignored. Once added, they will stay, until manually removed.""");
         prompt.setFocusable(false);
         prompt.setEditable(false);
 
