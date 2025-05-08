@@ -53,6 +53,6 @@
 - Added Sakhal proto
 - The Welcoming window displays for 2 instead of 3 seconds now
 
-**Version 3.1.2. - 08.05.25**
+**Version 3.1.3. - 08.05.25**
 - Updated Sakhal resource prototypes file
 ****
